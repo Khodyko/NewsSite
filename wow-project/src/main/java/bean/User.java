@@ -1,6 +1,6 @@
 package bean;
 
-public class User {
+public class User extends SqlSendable {
 	private String role;
 	private String login;
 	public String getRole() {

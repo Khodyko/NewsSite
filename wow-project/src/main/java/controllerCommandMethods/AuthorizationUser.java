@@ -20,7 +20,8 @@ public class AuthorizationUser implements Command {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = "/WEB-INF/jsp/authorizationComplite.jsp";
+		String path;
+		String lastCommandName="GO_TO_MAIN_PAGE";
 		String login=request.getParameter("login");
 		String password=request.getParameter("password");
 		try {
@@ -30,10 +31,16 @@ public class AuthorizationUser implements Command {
 		
 		} catch (ServiceException e) {
 			request.setAttribute("message", "Login or password wrong");
-			response.sendRedirect("Controller?commandToController=AUTHORIZATION_PAGE&message=Registration complite, please log in");
+			path="AUTHORIZATION_PAGE&message=Registration complite, please log in";
+			lastCommandName="AUTHORIZATION_PAGE";
+			request.getSession(true).setAttribute("lastURL", lastCommandName ); //for redirect in localization
+			response.sendRedirect("Controller?commandToController="+path);
 		}
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
-		requestDispatcher.forward(request, response);
+	
+		request.getSession(true).setAttribute("lastURL", lastCommandName ); //for redirect in localization
+		response.sendRedirect("Controller?commandToController="+lastCommandName);
+		
+		
 	}
 
 }

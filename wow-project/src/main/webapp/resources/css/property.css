@@ -1,22 +1,109 @@
-body{
-	background-color:black}
-h1{color:white; text-align:center}
-h2{color:white; text-align:center}
-h3{color:white; text-align:center}
-h4{color:white; text-align:center}
-h5{color:white; text-align:center}
-h6{color:white; text-align:center}
-font{
-	color:white}
-.redbutton1{background:red; width:200px; color:white; size: 12px; font-weight:600}
-button{
-	height: 20px; width: 120px;  border: none; border-radius: 5px; margin-right: 10px; color:black; font-weight:600;}
-.conteiner {
-	display:flex;  flex-direction: line;
-}			 
-.registrationDiv{height:350px; width: 250px; background: linear-gradient(0deg,#1c1010, #291010 ); margin: 0 auto; border-radius: 5px; margin-top:120; margin-bottom:60; text-align: center;display: flex; flex-direction: column;}
-.headline{border-bottom:1px white solid; margin: 20px; margin-left:0px; margin-right:0px; height: 50px; background-color: black; display: flex; justify-content: space-between; align-items: center; }
-input{background-color:#534343;border: none; border-radius: 5px;width:200px; height:30px; color:white; padding-left: 15px;}
+body {
+	background-color: black
+}
 
-input[type=submit]{border: none; border-radius: 5px; width:200px; height:30px;}
-.systemMessage{color:red; size:10px; text-align:center}
+h1 {
+	color: white;
+	text-align: center
+}
+
+h2 {
+	color: white;
+	text-align: center
+}
+
+h3 {
+	color: white;
+	text-align: center
+}
+
+h4 {
+	color: white;
+	text-align: center
+}
+
+h5 {
+	color: white;
+	text-align: center
+}
+
+h6 {
+	color: white;
+	text-align: center
+}
+
+font {
+	color: white
+}
+
+.redbutton1 {
+	background: red;
+	width: 200px;
+	color: white;
+	size: 12px;
+	font-weight: 600
+}
+
+button {
+	height: 20px;
+	width: 120px;
+	border: none;
+	border-radius: 5px;
+	margin-right: 10px;
+	color: black;
+	font-weight: 600;
+}
+
+.conteiner {
+	display: flex;
+	flex-direction: line;
+}
+
+.registrationDiv {
+	height: 350px;
+	width: 250px;
+	background: linear-gradient(0deg, #1c1010, #291010);
+	margin: 0 auto;
+	border-radius: 5px;
+	margin-top: 120;
+	margin-bottom: 60;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.headline {
+	border-bottom: 1px white solid;
+	margin: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
+	height: 50px;
+	background-color: black;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+input {
+	background-color: #534343;
+	border: none;
+	border-radius: 5px;
+	width: 200px;
+	height: 30px;
+	color: white;
+	padding-left: 15px;
+}
+
+input[type=submit] {
+	border: none;
+	border-radius: 5px;
+	width: 200px;
+	height: 30px;
+}
+
+.systemMessage {
+	color: red;
+	size: 10px;
+	text-align: center
+}
+

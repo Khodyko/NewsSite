@@ -1,6 +1,6 @@
 package bean;
 
-public class RegistrationInfo {
+public class RegistrationInfo extends SqlSendable {
 	private String login;
 	private String password;
 	public String getLogin() {

@@ -32,7 +32,9 @@ public class Controller extends HttpServlet {
 		response.setContentType("text/html");
 
 		String commandName = request.getParameter(COMMAND_TO_CONTROLLER);
+	
 		Command command = provider.findCommand(commandName);
+		
 		command.execute(request, response);
 
 	}

@@ -1,6 +1,6 @@
 package bean;
 
-public class News {
+public class News extends SqlSendable{
 private String title;
 private String brief;
 private String imgLink;

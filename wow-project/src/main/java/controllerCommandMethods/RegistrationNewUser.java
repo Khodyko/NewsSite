@@ -18,17 +18,25 @@ public class RegistrationNewUser implements Command {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String path;
 		String login=request.getParameter("login");
 		String password=request.getParameter("password");
 		RegistrationInfo info = new RegistrationInfo(login, password);
+		String lastCommandName="AUTHORIZATION_PAGE";
 		try {
 			userService.registration(info);
 			request.setAttribute("message", "Registration complite, please log in");
-			response.sendRedirect("Controller?commandToController=AUTHORIZATION_PAGE&message=Registration complite, please log in");
+			path="AUTHORIZATION_PAGE&message=Registration complite, please log in";
+			request.getSession(true).setAttribute("lastURL", lastCommandName ); //for redirect in localization
+			RequestDispatcher requestDispatcher=request.getRequestDispatcher(path);
+			requestDispatcher.forward(request, response);
 		}
 		catch (ServiceException e) {
-			response.sendRedirect("Controller?commandToController=REGISTRATION_PAGE&message=Registration not complite");
+			path="REGISTRATION_PAGE&message=Registration not complite";
+			lastCommandName="REGISTRATION_PAGE";
+			request.getSession(true).setAttribute("lastURL", lastCommandName); //for redirect in localization
+			RequestDispatcher requestDispatcher=request.getRequestDispatcher(path);
+			requestDispatcher.forward(request, response);
 			
 			
 			

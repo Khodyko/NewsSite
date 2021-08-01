@@ -11,6 +11,7 @@ import controllerCommandMethods.RegistrationNewUser;
 import controllerCommandMethods.UnknownCommand;
 import controllerCommandMethods.AddNews;
 import controllerCommandMethods.AuthorizationUser;
+import controllerCommandMethods.ChangeLocal;
 
 public class CommandProvider {
 	private Map<CommandName, Command> commands = new HashMap<>();
@@ -23,7 +24,8 @@ public class CommandProvider {
 		commands.put(CommandName.GO_TO_MAIN_PAGE, new GoToMainPage());
 		commands.put(CommandName.ADD_NEWS, new AddNews());
 		commands.put(CommandName.CHANGE_NEWS_PAGE, new GoToChangeNewsPage());
-
+		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());
+		
 		commands.put(CommandName.UNKNOWN_COMMAND, new UnknownCommand());
 	}
 	

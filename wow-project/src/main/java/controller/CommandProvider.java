@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import controllerCommandMethods.GoToAuthorizationPage;
-import controllerCommandMethods.GoToChangeNewsPage;
+import controllerCommandMethods.GoToAddNewsPage;
 import controllerCommandMethods.GoToMainPage;
 import controllerCommandMethods.GoToRegistrationPage;
 import controllerCommandMethods.RegistrationNewUser;
@@ -23,7 +23,7 @@ public class CommandProvider {
 		commands.put(CommandName.AUTHORIZATION_USER, new AuthorizationUser());
 		commands.put(CommandName.GO_TO_MAIN_PAGE, new GoToMainPage());
 		commands.put(CommandName.ADD_NEWS, new AddNews());
-		commands.put(CommandName.CHANGE_NEWS_PAGE, new GoToChangeNewsPage());
+		commands.put(CommandName.ADD_NEWS_PAGE, new GoToAddNewsPage());
 		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());
 		
 		commands.put(CommandName.UNKNOWN_COMMAND, new UnknownCommand());

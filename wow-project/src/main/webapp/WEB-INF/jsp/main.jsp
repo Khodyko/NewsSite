@@ -21,8 +21,8 @@
 
 <fmt:message bundle="${loc}" key="local.headline.button.name.register"
 	var="register_button" />
-<fmt:message bundle="${loc}" key="local.headline.button.name.changenews"
-	var="change_news_button" />
+<fmt:message bundle="${loc}" key="local.headline.button.name.addnews"
+	var="add_news_button" />
 <fmt:message bundle="${loc}" key="local.headline.button.name.login"
 	var="login_button" />
 
@@ -38,8 +38,8 @@
 
 			<form action="Controller" method="post">
 				<input type="hidden" name="commandToController"
-					value="CHANGE_NEWS_PAGE" />
-				<button>${change_news_button}</button>
+					value="ADD_NEWS_PAGE" />
+				<button>${add_news_button}</button>
 			</form>
 			<form action="Controller" method="post">
 				<input type="hidden" name="commandToController"

@@ -2,7 +2,10 @@ package controllerCommandMethods;
 
 import java.io.IOException;
 
+
+
 import bean.RegistrationInfo;
+import bean.Role;
 import controller.Command;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -21,15 +24,18 @@ public class RegistrationNewUser implements Command {
 		String path;
 		String login=request.getParameter("login");
 		String password=request.getParameter("password");
-		RegistrationInfo info = new RegistrationInfo(login, password);
+		Role role=Role.STANDARD_USER;
+		RegistrationInfo info = new RegistrationInfo(login, password, role);
 		String lastCommandName="AUTHORIZATION_PAGE";
 		try {
 			userService.registration(info);
+			
 			request.setAttribute("message", "Registration complite, please log in");
 			path="AUTHORIZATION_PAGE&message=Registration complite, please log in";
 			request.getSession(true).setAttribute("lastURL", lastCommandName ); //for redirect in localization
-			RequestDispatcher requestDispatcher=request.getRequestDispatcher(path);
-			requestDispatcher.forward(request, response);
+//			RequestDispatcher requestDispatcher=request.getRequestDispatcher(path);
+//			requestDispatcher.forward(request, response);
+			response.sendRedirect("Controller?commandToController="+path);
 		}
 		catch (ServiceException e) {
 			path="REGISTRATION_PAGE&message=Registration not complite";

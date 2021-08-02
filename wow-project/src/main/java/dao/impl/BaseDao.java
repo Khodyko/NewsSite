@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.sql.Connection;
 
 import bean.SqlSendable;
-import dao.Dao;
 
-public abstract class BaseDao<T extends SqlSendable> implements Dao<T> {
+
+public abstract class BaseDao<T extends SqlSendable>  {
 	public static Connection connection;
 	
 	
@@ -18,7 +18,7 @@ public abstract class BaseDao<T extends SqlSendable> implements Dao<T> {
 	        {
 	            Class.forName("com.mysql.cj.jdbc.Driver");
 	            connection = DriverManager.getConnection("jdbc:mysql://localhost/news_server","root","root");
-//	            System.out.println("Remote DB connection established");
+	            System.out.println("Remote DB connection established");
 	        }
 	        catch (ClassNotFoundException e)
 	        {

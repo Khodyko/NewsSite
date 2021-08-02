@@ -5,18 +5,18 @@ import bean.RegistrationInfo;
 import bean.User;
 import dao.impl.BaseDao;
 import dao.impl.NewsDaoImpl;
-import dao.impl.RegistrationInfoDaoImpl;
-import dao.impl.UserDaoImpl;
+import dao.impl.UserInfoDaoImpl;
+
 
 public class DaoProvider {
 	private static final DaoProvider instance = new DaoProvider();
 
-	private final UserDaoImpl userDao = new UserDaoImpl();
+//	private final UserDaoImpl userDao = new UserDaoImpl();
 	private final NewsDaoImpl newDao = new NewsDaoImpl();
 	
-private final RegistrationInfoDaoImpl registrationInfoDaoImpl=new RegistrationInfoDaoImpl();
+private final UserInfoDaoImpl registrationInfoDaoImpl=new UserInfoDaoImpl();
 
-	public RegistrationInfoDaoImpl getRegistrationInfoDaoImpl() {
+	public UserInfoDaoImpl getRegistrationInfoDaoImpl() {
 	return registrationInfoDaoImpl;
 }
 
@@ -29,9 +29,9 @@ private final RegistrationInfoDaoImpl registrationInfoDaoImpl=new RegistrationIn
 	}
 
 
-	public UserDaoImpl getUserDao() {
-		return  userDao;
-	}
+//	public UserDaoImpl getUserDao() {
+//		return  userDao;
+//	}
 
 
 	public NewsDaoImpl getNewDao() {

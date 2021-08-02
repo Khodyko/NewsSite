@@ -15,8 +15,8 @@
 
 <fmt:message bundle="${loc}" key="local.headline.button.name.register"
 	var="register_button" />
-<fmt:message bundle="${loc}" key="local.headline.button.name.changenews"
-	var="change_news_button" />
+<fmt:message bundle="${loc}" key="local.headline.button.name.addnews"
+	var="add_news_button" />
 <fmt:message bundle="${loc}" key="local.headline.button.name.login"
 	var="login_button" />
 </head>
@@ -30,8 +30,8 @@
 
 			<form action="Controller" method="post">
 				<input type="hidden" name="commandToController"
-					value="CHANGE_NEWS_PAGE" />
-				<button>${change_news_button}</button>
+					value="ADD_NEWS_PAGE" />
+				<button>${add_news_button}</button>
 			</form>
 			<form action="Controller" method="post">
 				<input type="hidden" name="commandToController"
@@ -53,8 +53,8 @@
 				<img src="resources/pictures/usFlag.png">
 			</button>
 		</form>
-		
-		
+
+
 		<form action="Controller" method="post">
 			<input type="hidden" name="commandToController" value="CHANGE_LOCAL" />
 			<button type="submit" name="local" value="ru"
@@ -65,21 +65,25 @@
 
 	</div>
 	<div class="registrationDiv">
-	<h2 style="font-weight: 600;">Add New News</h2>
-	<br /> <br /> <br /> 
-		<form action="Controller" method="post">
-			<input type="text" name="title" value="" placeholder="title" />
+		<h2 style="font-weight: 600;">Add New News</h2>
+		<br /> <br /> <br />
+		<form action="Controller" method="post" enctype="multipart/form-data">
+			<input type="text" name="title" value="" placeholder="title" /> 
+			<br /><br /> 
+			<input type="text" name="brief" value="" placeholder="brief" style="size: 80px" />
 			<br /> <br /> 
-			
-			 <input
-				type="text" name="brief" value="" placeholder="brief" style="size:80px" /> <input
-				type="hidden" name="commandToController" value="ADD_NEWS" />
-				
-				<br /> <br /> <br /> <br /> 
+			<input type="text" name="full_text" value="" placeholder="full text" style="size: 80px" />
+			<br /> <br /> 
+			<!--<label style="color: white;"> 
+				Load Image <input type="file" name="file" style="visibility: hidden;" multiple accept="image/*" />
+			</label> 
+			-->
+			<input type="hidden" name="commandToController" value="ADD_NEWS" />
+			<br /> <br /> <br /> <br />
 			<button>Send</button>
 		</form>
 	</div>
-	
+
 
 </body>
 </html>

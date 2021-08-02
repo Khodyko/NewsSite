@@ -3,6 +3,13 @@ package bean;
 public class News extends SqlSendable{
 private String title;
 private String brief;
+private String fullText;
+public String getFullText() {
+	return fullText;
+}
+public void setFulText(String fullText) {
+	this.fullText = fullText;
+}
 private String imgLink;
 
 
@@ -13,10 +20,11 @@ public String getImgLink() {
 public void setImgLink(String imgLink) {
 	this.imgLink = imgLink;
 }
-public News(String title, String brief,String imgLink) {
+public News(String title,String fullText, String brief,String imgLink) {
 	super();
 	this.title = title;
 	this.brief = brief;
+	this.fullText=fullText;
 	this.imgLink=imgLink;
 	
 }

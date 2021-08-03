@@ -33,7 +33,7 @@ public class NewsDaoImpl extends BaseDao<News> {
 		return null;
 	}
 	
-	public ArrayList<News> getNewsList() throws DAOException{
+	public ArrayList<News> getNewsList(Integer countOf5NewsPage) throws DAOException{
 		ArrayList<News> newsList=new ArrayList<News>();
 		String title;
 		String fullText;
@@ -42,6 +42,7 @@ public class NewsDaoImpl extends BaseDao<News> {
 		
 		try {
 			connectionQuery();
+			
 			PreparedStatement statement=connection.prepareStatement("SELECT * from news");
 			ResultSet result=statement.executeQuery();
 			while(result.next()) {
@@ -50,6 +51,7 @@ public class NewsDaoImpl extends BaseDao<News> {
 				fullText=result.getString("full_text");
 				imgLink=result.getString("img_link");
 				newsList.add(new News(title, fullText, brief, imgLink));
+				System.out.println(title);
 			}
 		}catch (Exception e) {
 			throw new DAOException();
@@ -70,7 +72,27 @@ public class NewsDaoImpl extends BaseDao<News> {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	
+	public Integer getMaxId() throws DAOException{
+		Integer numberRow=0;
+		try {
+			connectionQuery();
+			PreparedStatement statement=connection.prepareStatement("select count(*) from dataTable");
+			    ResultSet rs = statement.executeQuery();
+			    while(rs.next()){
+			        numberRow = rs.getInt("count(*)");
+			    }
+			System.out.println("PS has gone");	
+			 connection.close();
+		}	
+		catch (Exception e) {
+				throw new DAOException();
+			}
+		
+		return numberRow;
+		
+	}
 	
 		
 	}

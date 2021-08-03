@@ -71,7 +71,20 @@
 		</form>
 
 	</div>
-
-
+	<div style="justify-content:center;">
+	<div style="width: 50%; margin: 0 auto; text-align: center;" >
+		<c:forEach var="news" items="${newses}">
+			<h1>
+				<c:out value="${news.getTitle()}" />
+			</h1>
+			<img  alt="image" src=<c:out value="${news.getImgLink()}"/>>
+			<h4>
+				<c:out value="${news.getBrief()}" />
+			</h4>
+			<hr align="center"  size="1" color="white" />
+			
+		</c:forEach>
+	</div>
+</div>
 </body>
 </html>

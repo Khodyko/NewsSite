@@ -9,7 +9,7 @@ import bean.News;
 import bean.RegistrationInfo;
 import dao.DAOException;
 
-public class UserInfoDaoImpl extends BaseDao<RegistrationInfo> {
+public class RegistrationInfoDaoImpl extends BaseDao<RegistrationInfo> {
 
 	
 	public void create(RegistrationInfo entity) throws DAOException {
@@ -55,7 +55,7 @@ public class UserInfoDaoImpl extends BaseDao<RegistrationInfo> {
 		
 	}
 
-	public UserInfoDaoImpl() {
+	public RegistrationInfoDaoImpl() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -13,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.NewsService;
+import service.ServiceException;
 import service.ServiceProvider;
 
 public class GoToMainPage implements Command {
@@ -23,19 +24,15 @@ public class GoToMainPage implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-//		ArrayList<News> newses=new ArrayList<News>();
-//		newses.add(new News("You will be shocked!", "In order to sit on a computer all day and get paid for it, you need...", "resources/pictures/surpriseface.jpg"));
-//		newses.add(new News("t2", "b2 b2 b2",  "resources/pictures/surpriseface.jpg"));
-//		newses.add(new News("t2", "b2 b2 b2",  "resources/pictures/surpriseface.jpg"));
-//		newses.add(new News("t2", "b2 b2 b2",  "resources/pictures/surpriseface.jpg"));
-//		newses.add(new News("t2", "b2 b2 b2",  "resources/pictures/surpriseface.jpg"));
-//		newses.add(new News("t2", "b2 b2 b2",  "resources/pictures/surpriseface.jpg"));
-//		newses.add(new News("t2", "b2 b2 b2",  "resources/pictures/surpriseface.jpg"));
-//		newses.add(new News("t2", "b2 b2 b2",  "resources/pictures/surpriseface.jpg"));
-//		newses.add(new News("t2", "b2 b2 b2",  "resources/pictures/surpriseface.jpg"));
-//		newses.add(new News("t2", "b2 b2 b2",  "resources/pictures/surpriseface.jpg"));
-//		
-//		request.setAttribute("newses", newses);
+		try {
+			ArrayList<News> newses=newsService.getNewsList(1);
+			request.setAttribute("newses", newses);
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		
 		
 		
 		String path = "/WEB-INF/jsp/main.jsp";

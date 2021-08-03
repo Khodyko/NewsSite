@@ -4,7 +4,7 @@ import dao.DAOException;
 
 import dao.DaoProvider;
 import dao.impl.BaseDao;
-import dao.impl.UserInfoDaoImpl;
+import dao.impl.RegistrationInfoDaoImpl;
 
 import service.ServiceException;
 import service.UserService;
@@ -15,7 +15,7 @@ import bean.User;
 public class UserServiceImpl implements UserService {
 	private static final DaoProvider DAO_PROVIDER = DaoProvider.getInstance();
 
-	private static final UserInfoDaoImpl REGISTRATION_INFO_DAO_IMPL = DAO_PROVIDER.getRegistrationInfoDaoImpl();
+	private static final RegistrationInfoDaoImpl REGISTRATION_INFO_DAO_IMPL = DAO_PROVIDER.getRegistrationInfoDaoImpl();
 
 	public void registration(RegistrationInfo info) throws ServiceException {
 
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 //			throw new ServiceException(e);//????
 //		}
 		return new User();
-
+//
 	}
 
 	private String validation(String string) {

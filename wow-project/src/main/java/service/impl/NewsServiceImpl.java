@@ -8,6 +8,7 @@ import dao.DAOException;
 import dao.DaoProvider;
 import dao.impl.NewsDaoImpl;
 import service.NewsService;
+import service.ServiceException;
 
 public class NewsServiceImpl implements NewsService {
 	private static final DaoProvider DAO_PROVIDER = DaoProvider.getInstance();
@@ -29,6 +30,21 @@ public class NewsServiceImpl implements NewsService {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+	@Override
+	public ArrayList<News> getNewsList(Integer countOf5NewsPage) throws ServiceException {
+		ArrayList<News> newsList=new ArrayList<News>();
+		try {
+			newsList=NEWS_DAO_IMPL.getNewsList(countOf5NewsPage);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return newsList;
+	}
+	
+	
 	
 
 }

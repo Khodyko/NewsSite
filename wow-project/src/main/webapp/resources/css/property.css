@@ -1,5 +1,6 @@
 body {
 	background-color: black
+	
 }
 
 h1 {
@@ -70,6 +71,15 @@ button {
 	text-align: center;
 	display: flex;
 	flex-direction: column;
+}
+
+.news_div {
+	
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+
+
 }
 
 .headline {

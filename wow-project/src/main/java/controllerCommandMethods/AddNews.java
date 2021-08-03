@@ -77,10 +77,10 @@ public class AddNews implements Command {
 					news.setBrief(news.getFullText());
 				}
 				else {
-				news.setBrief(news.getFullText().substring(0,40)+"...");}
+				news.setBrief(news.getFullText().substring(0,100)+"...");}
 			}
 			if(news.getImgLink()==null || news.getImgLink().equals("")) {
-				news.setImgLink("resources/pictures/surpriseface.png");
+				news.setImgLink("resources/pictures/surpriseface.jpg");
 			}
 			newsService.add(news);
 			request.setAttribute("message", message);

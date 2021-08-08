@@ -38,7 +38,7 @@ public class AuthorizationUser implements Command {
 		try {
 			User user = userService.authorization(info);
 			if (user != null) {
-				System.out.println(user.getLogin()+"it is works!!!!!!!!!!!");
+				System.out.println(user.getRole().toString()+" it is works!!!!!!!!!!!");
 				HttpSession session = request.getSession(true);
 				session.setAttribute("user", user);
 				lastCommandName = "GO_TO_MAIN_PAGE";

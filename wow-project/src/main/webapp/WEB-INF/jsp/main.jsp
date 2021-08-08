@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="bean.News"%>
+<%@ page import="bean.User"%>
+<%@ page import="bean.RoleEnum"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -36,11 +38,21 @@
 		</h1>
 		<div class="conteiner">
 
-			<form action="Controller" method="post">
-				<input type="hidden" name="commandToController"
-					value="ADD_NEWS_PAGE" />
-				<button>${add_news_button}</button>
-			</form>
+			<c:if test="${sessionScope.user != null}">
+				<%
+				String UserRole = (((User) request.getSession(false).getAttribute("user")).getRole()).toString();
+				request.setAttribute("UserRole", UserRole);
+				%>
+				
+				<c:if test="${UserRole == 'ADMIN'}">
+					<form action="Controller" method="post">
+
+						<input type="hidden" name="commandToController"
+							value="ADD_NEWS_PAGE" />
+						<button>${add_news_button}</button>
+					</form>
+				</c:if>
+			</c:if>
 			<form action="Controller" method="post">
 				<input type="hidden" name="commandToController"
 					value="REGISTRATION_PAGE" />
@@ -71,20 +83,20 @@
 		</form>
 
 	</div>
-	<div style="justify-content:center;">
-	<div style="width: 50%; margin: 0 auto; text-align: center;" >
-		<c:forEach var="news" items="${newses}">
-			<h1>
-				<c:out value="${news.getTitle()}" />
-			</h1>
-			<img  alt="image" src=<c:out value="${news.getImgLink()}"/>>
-			<h4>
-				<c:out value="${news.getBrief()}" />
-			</h4>
-			<hr align="center"  size="1" color="white" />
-			
-		</c:forEach>
+	<div style="justify-content: center;">
+		<div style="width: 50%; margin: 0 auto; text-align: center;">
+			<c:forEach var="news" items="${newses}">
+				<h1>
+					<c:out value="${news.getTitle()}" />
+				</h1>
+				<img alt="image" src=<c:out value="${news.getImgLink()}"/>>
+				<h4>
+					<c:out value="${news.getBrief()}" />
+				</h4>
+				<hr align="center" size="1" color="white" />
+
+			</c:forEach>
+		</div>
 	</div>
-</div>
 </body>
 </html>

@@ -66,7 +66,6 @@
 	</div>
 	<div class="registrationDiv">
 		<h2 style="font-weight: 600;">Add New News</h2>
-		<br /> <br /> <br />
 		<form action="Controller" method="post" enctype="multipart/form-data">
 			<input type="text" name="title" value="" placeholder="title" /> 
 			<br /><br /> 

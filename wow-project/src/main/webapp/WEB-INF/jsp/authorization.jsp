@@ -89,7 +89,8 @@
 		</div>
 		<form action="Controller" method="post" style="color: white">
 			<br /> <br /> <input type="hidden" name="commandToController"
-				value="AUTHORIZATION_USER" /> <br /> <input type="text"
+				value="AUTHORIZATION_USER" /> 
+				 <input type="text"
 				name="login" value="" placeholder="${field_login}" /><br /> <br /> <input
 				type="password" name="password" value="" placeholder="${field_password}" /><br />
 			<br /> <br /> <input type="submit" value="${send_button}" class="redbutton1" /><br />

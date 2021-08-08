@@ -2,15 +2,15 @@ package bean;
 
 
 
-public class RegistrationInfo extends SqlSendable {
+public class RegistrationInfo {
 	private String login;
 	private String password;
-	private Role role;
+	private RoleEn role;
 	
-	public void setRole(Role role) {
+	public void setRole(RoleEn role) {
 		this.role = role;
 	}
-	public Role getRole() {
+	public RoleEn getRole() {
 		return role;
 	}
 	public String getLogin() {
@@ -25,7 +25,7 @@ public class RegistrationInfo extends SqlSendable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public RegistrationInfo(String login, String password, Role role) {
+	public RegistrationInfo(String login, String password, RoleEn role) {
 		super();
 		this.login = login;
 		this.password = password;

@@ -3,20 +3,20 @@ package dao;
 import bean.News;
 import bean.RegistrationInfo;
 import bean.User;
-import dao.impl.BaseDao;
+
 import dao.impl.NewsDaoImpl;
-import dao.impl.RegistrationInfoDaoImpl;
+import dao.impl.UserDaoImpl;
 
 
 public class DaoProvider {
 	private static final DaoProvider instance = new DaoProvider();
 
-//	private final UserDaoImpl userDao = new UserDaoImpl();
-	private final NewsDaoImpl newDao = new NewsDaoImpl();
+	private final UserDao userDao = new UserDaoImpl();
+	private final NewsDao newDao = new NewsDaoImpl();
 	
-private final RegistrationInfoDaoImpl registrationInfoDaoImpl=new RegistrationInfoDaoImpl();
+private final UserDaoImpl registrationInfoDaoImpl=new UserDaoImpl();
 
-	public RegistrationInfoDaoImpl getRegistrationInfoDaoImpl() {
+	public UserDaoImpl getRegistrationInfoDaoImpl() {
 	return registrationInfoDaoImpl;
 }
 
@@ -29,12 +29,12 @@ private final RegistrationInfoDaoImpl registrationInfoDaoImpl=new RegistrationIn
 	}
 
 
-//	public UserDaoImpl getUserDao() {
-//		return  userDao;
-//	}
+	public UserDao getUserDao() {
+		return  userDao;
+	}
 
 
-	public NewsDaoImpl getNewDao() {
+	public NewsDao getNewDao() {
 		return  newDao;
 	}
 	

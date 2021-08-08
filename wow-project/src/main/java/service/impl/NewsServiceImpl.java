@@ -6,13 +6,14 @@ import java.util.List;
 import bean.News;
 import dao.DAOException;
 import dao.DaoProvider;
+import dao.NewsDao;
 import dao.impl.NewsDaoImpl;
 import service.NewsService;
 import service.ServiceException;
 
 public class NewsServiceImpl implements NewsService {
 	private static final DaoProvider DAO_PROVIDER = DaoProvider.getInstance();
-	private static final NewsDaoImpl NEWS_DAO_IMPL=DAO_PROVIDER.getNewDao();
+	private static final NewsDao NEWS_DAO_IMPL=DAO_PROVIDER.getNewDao();
 	
 	@Override
 	public void add(News news) {

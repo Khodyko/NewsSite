@@ -5,12 +5,12 @@ package bean;
 public class RegistrationInfo {
 	private String login;
 	private String password;
-	private RoleEn role;
+	private RoleEnum role;
 	
-	public void setRole(RoleEn role) {
+	public void setRole(RoleEnum role) {
 		this.role = role;
 	}
-	public RoleEn getRole() {
+	public RoleEnum getRole() {
 		return role;
 	}
 	public String getLogin() {
@@ -25,7 +25,7 @@ public class RegistrationInfo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public RegistrationInfo(String login, String password, RoleEn role) {
+	public RegistrationInfo(String login, String password, RoleEnum role) {
 		super();
 		this.login = login;
 		this.password = password;

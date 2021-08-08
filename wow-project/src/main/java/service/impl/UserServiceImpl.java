@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 			if (validation(info.getLogin()).equals("valid") || info.getPassword().equals("valid")) {
 				USER_DAO_IMPL.registration(info);
 			} else {
-				throw new DAOException();// stub
+				throw new DAOException("Login or password is not valid"); // concrete
 			}
 		} catch (DAOException e) {
 			throw new ServiceException(e);
@@ -31,16 +31,18 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	public User authorization(String login, String password) throws ServiceException {
-//		try {
-//			User user= new User();
-//			USER_DAO_IMPL.create(null);
-//				
-//		} catch(DAOException e) {
-//			throw new ServiceException(e);//????
-//		}
-		return new User();
-//
+	public User authorization(RegistrationInfo info) throws ServiceException {
+		User user=null;
+		try {
+			if (validation(info.getLogin()).equals("valid") || info.getPassword().equals("valid")) {
+				user=USER_DAO_IMPL.authorization(info);
+			} else {
+				throw new DAOException("Login or password is not valid");// concrete
+			}
+		} catch (DAOException e) {
+			throw new ServiceException(e);
+		}
+		return user;
 	}
 
 	private String validation(String string) {

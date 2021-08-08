@@ -1,6 +1,6 @@
 package bean;
 
-public enum RoleEn {
+public enum RoleEnum {
 	STANDARD_USER, MANAGER, ADMIN 
 
 }

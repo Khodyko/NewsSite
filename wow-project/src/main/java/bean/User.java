@@ -1,14 +1,20 @@
 package bean;
 
-import javax.management.relation.Role;
 
-public class User extends SqlSendable {
-	private Role role;
+
+public class User{
+	private RoleEnum role;
 	private String login;
+	
+	public User(String login, RoleEnum role) {
+		super();
+		this.role = role;
+		this.login = login;
+	}
 	public String getRole() {
 		return role.toString();
 	}
-	public void setRole(Role role) {
+	public void setRole(RoleEnum role) {
 		this.role = role;
 	}
 	public String getLogin() {

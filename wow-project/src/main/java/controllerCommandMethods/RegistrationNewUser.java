@@ -3,7 +3,7 @@ package controllerCommandMethods;
 import java.io.IOException;
 
 import bean.RegistrationInfo;
-import bean.RoleEn;
+import bean.RoleEnum;
 import controller.Command;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -20,10 +20,10 @@ public class RegistrationNewUser implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path;
-		String lastCommandName = "AUTHORIZATION_PAGE";
+		String lastCommandName = "REGISTRATION_PAGE";
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
-		RoleEn role = RoleEn.STANDARD_USER;
+		RoleEnum role = RoleEnum.STANDARD_USER;
 
 		if (login == null || login.equals("") || password == null || password.equals("")) {
 			path = "REGISTRATION_PAGE&message=Some of fields are empty, please fill it";
@@ -39,6 +39,7 @@ public class RegistrationNewUser implements Command {
 			userService.registration(info);
 			request.setAttribute("message", "Registration complite, please log in");
 			path = "AUTHORIZATION_PAGE&message=Registration complite, please log in";
+			lastCommandName="AUTHORIZATION_PAGE";
 			request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 			response.sendRedirect("Controller?commandToController=" + path);
 		} catch (ServiceException e) {

@@ -16,8 +16,8 @@ import service.NewsService;
 import service.ServiceException;
 
 public class AddNews implements Command {
-	private static final ServiceProvider provider=ServiceProvider.getInstance();
-	private static final NewsService newsService= provider.getNewService();
+	private static final ServiceProvider PROVIDER=ServiceProvider.getInstance();
+	private static final NewsService NEWS_SERVICE = PROVIDER.getNewService();
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -82,12 +82,10 @@ public class AddNews implements Command {
 			if(news.getImgLink()==null || news.getImgLink().equals("")) {
 				news.setImgLink("resources/pictures/surpriseface.jpg");
 			}
-			newsService.add(news);
+			NEWS_SERVICE.add(news);
 			request.setAttribute("message", message);
 			path="ADD_NEWS_PAGE&message=Registration complite, please log in";
 			request.getSession(true).setAttribute("lastURL", lastCommandName ); //for redirect in localization
-//			RequestDispatcher requestDispatcher=request.getRequestDispatcher(path);
-//			requestDispatcher.forward(request, response);
 			response.sendRedirect("Controller?commandToController="+path);
 		}
 		catch (ServiceException e) {

@@ -12,14 +12,17 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+
 @WebServlet("/upload")
 @MultipartConfig
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String COMMAND_TO_CONTROLLER = "commandToController";
-	private final CommandProvider provider = new CommandProvider();
+	private static final CommandProvider PROVIDER = new CommandProvider();
 
 	public Controller() {
+		
 		super();
 	}
 
@@ -35,9 +38,9 @@ public class Controller extends HttpServlet {
 		response.setContentType("text/html");
 
 		String commandName = request.getParameter(COMMAND_TO_CONTROLLER);
-	
-		Command command = provider.findCommand(commandName);
-		
+
+		Command command = PROVIDER.findCommand(commandName);
+
 		command.execute(request, response);
 
 	}

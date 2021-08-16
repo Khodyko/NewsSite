@@ -17,8 +17,8 @@ import service.ServiceProvider;
 import service.UserService;
 
 public class AuthorizationUser implements Command {
-	private static final ServiceProvider provider = ServiceProvider.getInstance();
-	private static final UserService userService = provider.getUserService();
+	private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
+	private static final UserService USER_SERVICE = PROVIDER.getUserService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,9 +36,9 @@ public class AuthorizationUser implements Command {
 		}
 		RegistrationInfo info = new RegistrationInfo(login, password, role);
 		try {
-			User user = userService.authorization(info);
+			User user = USER_SERVICE.authorization(info);
 			if (user != null) {
-				System.out.println(user.getRole().toString()+" it is works!!!!!!!!!!!");
+				System.out.println(user.getRole().toString() + " it is works!!!!!!!!!!!");
 				HttpSession session = request.getSession(true);
 				session.setAttribute("user", user);
 				lastCommandName = "GO_TO_MAIN_PAGE";

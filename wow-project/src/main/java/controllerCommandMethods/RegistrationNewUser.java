@@ -14,8 +14,8 @@ import service.ServiceProvider;
 import service.UserService;
 
 public class RegistrationNewUser implements Command {
-	private static final ServiceProvider provider = ServiceProvider.getInstance();
-	private static final UserService userService = provider.getUserService();
+	private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
+	private static final UserService userService = PROVIDER.getUserService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,11 +39,11 @@ public class RegistrationNewUser implements Command {
 			userService.registration(info);
 			request.setAttribute("message", "Registration complite, please log in");
 			path = "AUTHORIZATION_PAGE&message=Registration complite, please log in";
-			lastCommandName="AUTHORIZATION_PAGE";
+			lastCommandName = "AUTHORIZATION_PAGE";
 			request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 			response.sendRedirect("Controller?commandToController=" + path);
 		} catch (ServiceException e) {
-			e.printStackTrace();//log
+			e.printStackTrace();// log
 			path = "REGISTRATION_PAGE&message=Registration not complite";
 			lastCommandName = "REGISTRATION_PAGE";
 			request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization

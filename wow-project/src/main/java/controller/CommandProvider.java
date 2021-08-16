@@ -15,7 +15,7 @@ import controllerCommandMethods.ChangeLocal;
 
 public class CommandProvider {
 	private Map<CommandName, Command> commands = new HashMap<>();
-	
+
 	public CommandProvider() {
 		commands.put(CommandName.AUTHORIZATION_PAGE, new GoToAuthorizationPage());
 		commands.put(CommandName.REGISTRATION_PAGE, new GoToRegistrationPage());
@@ -25,23 +25,21 @@ public class CommandProvider {
 		commands.put(CommandName.ADD_NEWS, new AddNews());
 		commands.put(CommandName.ADD_NEWS_PAGE, new GoToAddNewsPage());
 		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());
-		
 		commands.put(CommandName.UNKNOWN_COMMAND, new UnknownCommand());
 	}
-	
+
 	public Command findCommand(String name) {
 		if (name == null) {
 			name = CommandName.UNKNOWN_COMMAND.toString();
 		}
-		
+
 		CommandName commandName;
 		try {
-		    commandName = CommandName.valueOf(name.toUpperCase());
-		}catch(IllegalArgumentException e) {
-			// logging
-			commandName = CommandName.UNKNOWN_COMMAND;	
+			commandName = CommandName.valueOf(name.toUpperCase());
+		} catch (IllegalArgumentException e) { // logging
+			commandName = CommandName.UNKNOWN_COMMAND;
 		}
-		
+
 		Command command = commands.get(commandName);
 		return command;
 	}

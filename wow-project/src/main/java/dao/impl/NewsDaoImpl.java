@@ -40,6 +40,7 @@ public class NewsDaoImpl implements NewsDao {
 			throw new DAOException("False query", e);
 		} catch (Exception e) {
 			throw new DAOException("False query", e);
+			
 		}
 	}
 

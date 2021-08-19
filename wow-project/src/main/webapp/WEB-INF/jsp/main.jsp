@@ -1,6 +1,5 @@
 
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="bean.News"%>
 <%@ page import="bean.User"%>
 <%@ page import="bean.RoleEnum"%>
@@ -21,12 +20,9 @@
 <fmt:setBundle basename="localization.local" var="loc" />
 
 
-<fmt:message bundle="${loc}" key="local.headline.button.name.register"
-	var="register_button" />
-<fmt:message bundle="${loc}" key="local.headline.button.name.addnews"
-	var="add_news_button" />
-<fmt:message bundle="${loc}" key="local.headline.button.name.login"
-	var="login_button" />
+<fmt:message bundle="${loc}" key="local.headline.button.name.register" var="register_button" />
+<fmt:message bundle="${loc}" key="local.headline.button.name.addnews" var="add_news_button" />
+<fmt:message bundle="${loc}" key="local.headline.button.name.login" var="login_button" />
 
 </head>
 
@@ -36,34 +32,28 @@
 		<h1 style="margin: 20px; background-color: #cd0000">
 			<span>News </span>
 		</h1>
-		<div class="conteiner">
-
-			<c:if test="${sessionScope.user != null}">
+		<div class="conteiner"><c:if test="${sessionScope.user != null}">
 				<%
 				String UserRole = (((User) request.getSession(false).getAttribute("user")).getRole()).toString();
 				request.setAttribute("UserRole", UserRole);
 				%>
-				
+
 				<c:if test="${UserRole == 'ADMIN'}">
 					<form action="Controller" method="post">
 
-						<input type="hidden" name="commandToController"
-							value="ADD_NEWS_PAGE" />
+						<input type="hidden" name="commandToController" value="ADD_NEWS_PAGE" />
 						<button>${add_news_button}</button>
 					</form>
 				</c:if>
 			</c:if>
 			<form action="Controller" method="post">
-				<input type="hidden" name="commandToController"
-					value="REGISTRATION_PAGE" />
+				<input type="hidden" name="commandToController" value="REGISTRATION_PAGE" />
 				<button>${register_button}</button>
 			</form>
 			<form action="Controller" method="post">
-				<input type="hidden" name="commandToController"
-					value="AUTHORIZATION_PAGE" />
+				<input type="hidden" name="commandToController" value="AUTHORIZATION_PAGE" />
 				<button>${login_button}</button>
-			</form>
-		</div>
+			</form></div>
 	</div>
 
 	<div class="conteiner">
@@ -84,8 +74,7 @@
 
 	</div>
 	<div style="justify-content: center;">
-		<div style="width: 50%; margin: 0 auto; text-align: center;">
-			<c:forEach var="news" items="${newses}">
+		<div style="width: 50%; margin: 0 auto; text-align: center;"><c:forEach var="news" items="${newses}">
 				<h1>
 					<c:out value="${news.getTitle()}" />
 				</h1>
@@ -95,8 +84,7 @@
 				</h4>
 				<hr align="center" size="1" color="white" />
 
-			</c:forEach>
-		</div>
+			</c:forEach></div>
 	</div>
 </body>
 </html>

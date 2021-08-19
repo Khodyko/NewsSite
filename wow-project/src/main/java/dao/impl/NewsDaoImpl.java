@@ -30,7 +30,6 @@ public class NewsDaoImpl implements NewsDao {
 
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
 				PreparedStatement pr = connection.prepareStatement(sql);) {
-
 			System.out.println("Remote DB connection established");
 			pr.executeUpdate();
 		} catch (NullPointerException e) {
@@ -107,5 +106,4 @@ public class NewsDaoImpl implements NewsDao {
 //			}
 		return 0;
 	}
-
 }

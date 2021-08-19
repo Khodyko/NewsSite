@@ -13,39 +13,31 @@ import service.ServiceException;
 
 public class NewsServiceImpl implements NewsService {
 	private static final DaoProvider DAO_PROVIDER = DaoProvider.getInstance();
-	private static final NewsDao NEWS_DAO_IMPL=DAO_PROVIDER.getNewDao();
-	
+	private static final NewsDao NEWS_DAO_IMPL = DAO_PROVIDER.getNewDao();
+
 	@Override
-	public void add(News news) {
+	public void create(News news) throws ServiceException{
 		try {
-				NEWS_DAO_IMPL.create(news);
+			NEWS_DAO_IMPL.create(news);
 		} catch (DAOException e) {
-//			throw new ServiceException(e);
+			throw new ServiceException(e);
 		}
 	}
-
-
 
 	@Override
 	public void update(News news) {
 		// TODO Auto-generated method stub
-		
 	}
-
-
 
 	@Override
 	public ArrayList<News> getNewsList(Integer countOf5NewsPage) throws ServiceException {
-		ArrayList<News> newsList=new ArrayList<News>();
+		ArrayList<News> newsList = new ArrayList<News>();
 		try {
-			newsList=NEWS_DAO_IMPL.getNewsList(countOf5NewsPage);
+			newsList = NEWS_DAO_IMPL.getNewsList(countOf5NewsPage);
 		} catch (Exception e) {
-			// TODO: handle exception
+			throw new ServiceException(e);
 		}
 		return newsList;
 	}
-	
-	
-	
 
 }

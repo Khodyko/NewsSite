@@ -7,7 +7,8 @@
 <title>super</title>
 </head>
 <body>
-	<%response.sendRedirect("Controller?commandToController=GO_TO_MAIN_PAGE");
+	<%
+	response.sendRedirect("Controller?commandToController=GO_TO_MAIN_PAGE");
 	%>
 </body>
 </html>

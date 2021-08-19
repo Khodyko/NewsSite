@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
@@ -13,24 +12,15 @@
 <fmt:setBundle basename="localization.local" var="loc" />
 
 
-<fmt:message bundle="${loc}" key="local.headline.button.name.register"
-	var="register_button" />
-<fmt:message bundle="${loc}" key="local.headline.button.name.addnews"
-	var="add_news_button" />
-<fmt:message bundle="${loc}" key="local.headline.button.name.login"
-	var="login_button" />
-<fmt:message bundle="${loc}" key="local.registration.text.head1"
-	var="head1_text" />
-<fmt:message bundle="${loc}" key="local.registration.text.head2"
-	var="head2_text" />
-<fmt:message bundle="${loc}" key="local.registration.link.login.page"
-	var="link_login_page" />
-<fmt:message bundle="${loc}" key="local.registration.field.login"
-	var="field_login" />
-<fmt:message bundle="${loc}" key="local.registration.field.password"
-	var="field_password" />
-<fmt:message bundle="${loc}" key="local.registration.button.send"
-	var="send_button" />
+<fmt:message bundle="${loc}" key="local.headline.button.name.register" var="register_button" />
+<fmt:message bundle="${loc}" key="local.headline.button.name.addnews" var="add_news_button" />
+<fmt:message bundle="${loc}" key="local.headline.button.name.login" var="login_button" />
+<fmt:message bundle="${loc}" key="local.registration.text.head1" var="head1_text" />
+<fmt:message bundle="${loc}" key="local.registration.text.head2" var="head2_text" />
+<fmt:message bundle="${loc}" key="local.registration.link.login.page" var="link_login_page" />
+<fmt:message bundle="${loc}" key="local.registration.field.login" var="field_login" />
+<fmt:message bundle="${loc}" key="local.registration.field.password" var="field_password" />
+<fmt:message bundle="${loc}" key="local.registration.button.send" var="send_button" />
 </head>
 <body>
 	<div class="headline">
@@ -41,21 +31,18 @@
 		<div class="conteiner">
 
 			<form action="Controller" method="post">
-				<input type="hidden" name="commandToController"
-					value="ADD_NEWS_PAGE" />
+				<input type="hidden" name="commandToController" value="ADD_NEWS_PAGE" />
 				<button>${add_news_button}</button>
 			</form>
 			<form action="Controller" method="post">
-				<input type="hidden" name="commandToController"
-					value="REGISTRATION_PAGE" />
+				<input type="hidden" name="commandToController" value="REGISTRATION_PAGE" />
 				<button>${register_button}</button>
 			</form>
 			<form action="Controller" method="post">
-				<input type="hidden" name="commandToController"
-					value="AUTHORIZATION_PAGE" />
+				<input type="hidden" name="commandToController" value="AUTHORIZATION_PAGE" />
 				<button>${login_button}</button>
 			</form>
-		</div>
+	</div>
 	</div>
 	<div class="conteiner">
 		<form action="Controller" method="post">
@@ -75,31 +62,33 @@
 
 	</div>
 	<div class="registrationDiv">
-		<h2 style="font-weight: 600;">MD-JD2-76-21</h2>
-		<font style="text-size: 16; font-weight: 600;">${head1_text}</font>
-		<div style="display: flex; flex-direction: column;">
-			<font style="text-size: 5;">${head2_text}</font>
+		<h2 style="font-weight: 600;">MD-JD2-76-21</h2> <font style="text-size: 16; font-weight: 600;">${head1_text}</font>
+		<div style="display: flex; flex-direction: column;"><font style="text-size: 5;">${head2_text}</font>
 			<form action="Controller" method="post">
-				<input type="hidden" name="commandToController"
-					value="AUTHORIZATION_PAGE" /> <a
-					href="http://localhost:8080/wow-project/Controller?commandToController=AUTHORIZATION_PAGE">${link_login_page}</a>
-			</form>
-		</div>
+				<input type="hidden" name="commandToController" value="AUTHORIZATION_PAGE" />
+				<a href="http://localhost:8080/wow-project/Controller?commandToController=AUTHORIZATION_PAGE">${link_login_page}</a>
+			</form></div>
 		<form action="Controller" method="post">
-			<br /> <br /> <input type="hidden" name="commandToController"
-				value="REGISTRATION_NEW_USER" /> <br /> <input type="text"
-				name="login" value="" placeholder="${field_login}" /><br />
-			<br /> <input type="password" name="password" value=""
-				placeholder="${field_password}" /><br /> <br /> <br /> <input
-				type="submit" class="redbutton1" value="${send_button}" /><br />
-		</form>
-		<font class="systemMessage"> <%
+			<br />
+			<br />
+			<input type="hidden" name="commandToController" value="REGISTRATION_NEW_USER" />
+			<br />
+			<input type="text" name="login" value="" placeholder="${field_login}" />
+			<br />
+			<br />
+			<input type="password" name="password" value="" placeholder="${field_password}" />
+			<br />
+			<br />
+			<br />
+			<input type="submit" class="redbutton1" value="${send_button}" />
+			<br />
+		</form> <font class="systemMessage"> <%
  String message = (String) request.getParameter("message");
  if (message != null) {
  	out.print(message);
  }
  %>
-		</font>
+	</font>
 
 	</div>
 

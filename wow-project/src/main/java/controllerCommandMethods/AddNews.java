@@ -64,7 +64,7 @@ public class AddNews implements Command {
 //		}
 		try {
 			message= validateNews(news);
-			NEWS_SERVICE.add(news);
+			NEWS_SERVICE.create(news);
 			message="News succesfully added";
 			request.setAttribute("message", message);
 			path="ADD_NEWS_PAGE&message=Registration complite, please log in";

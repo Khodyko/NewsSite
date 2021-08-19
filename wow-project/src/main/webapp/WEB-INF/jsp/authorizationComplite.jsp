@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
@@ -13,12 +12,9 @@
 <fmt:setBundle basename="localization.local" var="loc" />
 
 
-<fmt:message bundle="${loc}" key="local.headline.button.name.register"
-	var="register_button" />
-<fmt:message bundle="${loc}" key="local.headline.button.name.addnews"
-	var="add_news_button" />
-<fmt:message bundle="${loc}" key="local.headline.button.name.login"
-	var="login_button" />
+<fmt:message bundle="${loc}" key="local.headline.button.name.register" var="register_button" />
+<fmt:message bundle="${loc}" key="local.headline.button.name.addnews" var="add_news_button" />
+<fmt:message bundle="${loc}" key="local.headline.button.name.login" var="login_button" />
 </head>
 <body>
 	<div class="headline">
@@ -29,21 +25,18 @@
 		<div class="conteiner">
 
 			<form action="Controller" method="post">
-				<input type="hidden" name="commandToController"
-					value="ADD_NEWS_PAGE" />
+				<input type="hidden" name="commandToController" value="ADD_NEWS_PAGE" />
 				<button>${add_news_button}</button>
 			</form>
 			<form action="Controller" method="post">
-				<input type="hidden" name="commandToController"
-					value="REGISTRATION_PAGE" />
+				<input type="hidden" name="commandToController" value="REGISTRATION_PAGE" />
 				<button>${register_button}</button>
 			</form>
 			<form action="Controller" method="post">
-				<input type="hidden" name="commandToController"
-					value="AUTHORIZATION_PAGE" />
+				<input type="hidden" name="commandToController" value="AUTHORIZATION_PAGE" />
 				<button>${login_button}</button>
 			</form>
-		</div>
+	</div>
 	</div>
 	<div class="conteiner">
 		<form action="Controller" method="post">

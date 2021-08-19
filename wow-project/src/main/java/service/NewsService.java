@@ -1,6 +1,7 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import bean.News;
 
@@ -10,6 +11,6 @@ public interface NewsService {
 
 	void update(News news) throws ServiceException;
 	
-	ArrayList<News> getNewsList(Integer countOf5NewsPage) throws ServiceException;
+	List<News> getNewsList(Integer countOf5NewsPage) throws ServiceException;
 
 }

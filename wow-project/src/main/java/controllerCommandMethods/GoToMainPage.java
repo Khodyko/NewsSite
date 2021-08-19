@@ -23,7 +23,7 @@ public class GoToMainPage implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			ArrayList<News> newses = NEWS_SERVICE.getNewsList(1);
+			List<News> newses = NEWS_SERVICE.getNewsList(1);
 			request.setAttribute("newses", newses);
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block

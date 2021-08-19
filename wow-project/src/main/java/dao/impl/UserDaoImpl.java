@@ -14,8 +14,11 @@ import dao.connectionpool.ConnectionPoolException;
 import dao.connectionpool.NewsConnectionPool;
 
 public class UserDaoImpl implements UserDao {
+	private static final String PARAMETR_NAME = "user_name";
+	private static final String PARAMETR_PASSWORD = "password";
+	private static final String PARAMETR_ROLE = "role";
 	private static final String SQL_INSERT_USER = "INSERT INTO users(user_name, password, role) VALUES (?, ?, ?)";
-	private static String sQL_GET_AUTHORIZATION = "SELECT * from users WHERE(user_name= ? AND password= ?)";
+	private static String SQL_GET_AUTHORIZATION = "SELECT * from users WHERE("+PARAMETR_NAME+"= ? AND "+PARAMETR_PASSWORD+"= ?)";
 
 	public void registration(RegistrationInfo entity) throws DAOException {
 
@@ -40,7 +43,7 @@ public class UserDaoImpl implements UserDao {
 		User sqlUser;
 
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
-				PreparedStatement pr = connection.prepareStatement(sQL_GET_AUTHORIZATION);) {
+				PreparedStatement pr = connection.prepareStatement(SQL_GET_AUTHORIZATION);) {
 			pr.setString(1, entity.getLogin());
 			pr.setString(2, entity.getPassword());
 			System.out.println("Remote DB connection established");
@@ -49,8 +52,8 @@ public class UserDaoImpl implements UserDao {
 				sqlUser = null;
 
 			} else {
-				String login = result.getString("user_name");
-				String roleString = result.getString("role");
+				String login = result.getString(PARAMETR_NAME);
+				String roleString = result.getString(PARAMETR_ROLE);
 				try {
 					RoleEnum roleRole = RoleEnum.valueOf(roleString);
 					sqlUser = new User(login, roleRole);

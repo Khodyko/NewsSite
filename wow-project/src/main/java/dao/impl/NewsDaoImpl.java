@@ -6,24 +6,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import bean.News;
-
 import dao.DAOException;
 import dao.NewsDao;
 import dao.connectionpool.ConnectionPoolException;
-import dao.connectionpool.DBNewsParameter;
-import dao.connectionpool.DBNewsResourceManager;
 import dao.connectionpool.NewsConnectionPool;
 
 public class NewsDaoImpl implements NewsDao {
-	private static final String SQL_INSERT_NEW= "INSERT INTO news( title, full_text, brief_text, img_link) VALUES (?, ?, ?, ?)";
+	private static final String PARAM_TITLE = "title";
+	private static final String PARAM_BRIEF = "brief_text";
+	private static final String PARAM_FULL_TEXT = "full_text";
+	private static final String PARAM_IMG_LINK = "img_link";
+	private static final String SQL_INSERT_NEWS= "INSERT INTO news( "+PARAM_TITLE+", "+PARAM_FULL_TEXT+", "+PARAM_BRIEF+", "+PARAM_IMG_LINK+") VALUES (?, ?, ?, ?)";
+	
+	
 	public void create(News entity) throws DAOException {
 
 
 
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
-				PreparedStatement pr = connection.prepareStatement(SQL_INSERT_NEW);) {
+				PreparedStatement pr = connection.prepareStatement(SQL_INSERT_NEWS);) {
 			
 			pr.setString(1, entity.getTitle());
 			pr.setString(2, entity.getFullText());
@@ -44,9 +48,9 @@ public class NewsDaoImpl implements NewsDao {
 		}
 	}
 
-	public ArrayList<News> getNewsList(Integer countOf5NewsPage) throws DAOException {
+	public List<News> getNewsList(Integer countOf5NewsPage) throws DAOException {
 		String sql = "SELECT * FROM news";
-		ArrayList<News> newsList = new ArrayList<News>();
+		List<News> newsList = new ArrayList<News>();
 		String title;
 		String fullText;
 		String brief;
@@ -57,10 +61,10 @@ public class NewsDaoImpl implements NewsDao {
 				Statement st = connection.createStatement();
 				ResultSet result = st.executeQuery(sql);) {
 			while (result.next()) {
-				title = result.getString("title");
-				brief = result.getString("brief_text");
-				fullText = result.getString("full_text");
-				imgLink = result.getString("img_link");
+				title = result.getString(PARAM_TITLE);
+				brief = result.getString(PARAM_BRIEF);
+				fullText = result.getString(PARAM_FULL_TEXT);
+				imgLink = result.getString(PARAM_IMG_LINK);
 				newsList.add(new News(title, fullText, brief, imgLink));
 				System.out.println(title);
 			}

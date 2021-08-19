@@ -1,18 +1,15 @@
 package controllerCommandMethods;
 
 import java.io.IOException;
-import java.lang.invoke.StringConcatFactory;
 
 import bean.RegistrationInfo;
 import bean.RoleEnum;
 import bean.User;
 import controller.Command;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.HttpSessionEvent;
 import service.ServiceException;
 import service.ServiceProvider;
 import service.UserService;

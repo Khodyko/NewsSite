@@ -40,7 +40,6 @@
 
 				<c:if test="${UserRole == 'ADMIN'}">
 					<form action="Controller" method="post">
-
 						<input type="hidden" name="commandToController" value="ADD_NEWS_PAGE" />
 						<button>${add_news_button}</button>
 					</form>

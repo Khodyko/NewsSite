@@ -64,31 +64,32 @@ public class NewsConnectionPool {
 		Locale.setDefault(Locale.ENGLISH);
 
 		try {
+			Class.forName(driverName);
 			givenAwayConQueue = new ArrayBlockingQueue<Connection>(poolSize);
 			connectionQueue = new ArrayBlockingQueue<Connection>(poolSize);
 
 			for (int i = 0; i < poolSize; i++) {
 				Connection connection = DriverManager.getConnection(url, user, password);
-
 				PooledConnection poledConnection = new PooledConnection(connection);
-
 				connectionQueue.add(poledConnection);
 			}
 		} catch (SQLException e) {
 			throw new ConnectionPoolException("SQLException in ConnectionPool", e);
+		} catch (ClassNotFoundException e) {
+			throw new ConnectionPoolException("Driver for work with DB is not found", e);
 		}
 	}
 
-	public void dispose() {
+	public void dispose() throws ConnectionPoolException{
 		clearConnectionQueue();
 	}
 
-	private void clearConnectionQueue() {
+	private void clearConnectionQueue() throws ConnectionPoolException {
 		try {
 			closeConnectionQueue(givenAwayConQueue);
 			closeConnectionQueue(connectionQueue);
 		} catch (SQLException e) {
-			// TODO: add log
+			throw new ConnectionPoolException("Connection is can't close it gives an Exception", e);
 		}
 	}
 

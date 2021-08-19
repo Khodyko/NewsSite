@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page import="bean.User"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,11 +31,21 @@
 			<span>News </span>
 		</h1>
 		<div class="conteiner">
+		<c:if test="${sessionScope.user != null}">
+				<%
+				String UserRole = (((User) request.getSession(false).getAttribute("user")).getRole()).toString();
+				request.setAttribute("UserRole", UserRole);
+				%>
 
-			<form action="Controller" method="post">
-				<input type="hidden" name="commandToController" value="ADD_NEWS_PAGE" />
-				<button>${add_news_button}</button>
-			</form>
+				<c:if test="${UserRole == 'ADMIN'}">
+					<form action="Controller" method="post">
+						<input type="hidden" name="commandToController" value="ADD_NEWS_PAGE" />
+						<button>${add_news_button}</button>
+					</form>
+				</c:if>
+			</c:if>
+
+			
 			<form action="Controller" method="post">
 				<input type="hidden" name="commandToController" value="REGISTRATION_PAGE" />
 				<button>${register_button}</button>

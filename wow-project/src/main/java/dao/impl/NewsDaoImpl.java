@@ -17,23 +17,22 @@ import dao.connectionpool.DBNewsResourceManager;
 import dao.connectionpool.NewsConnectionPool;
 
 public class NewsDaoImpl implements NewsDao {
-	private static final DBNewsResourceManager DB_NEWS_RES_MAN = DBNewsResourceManager.getInstance();
-
+	private static final String SQL_INSERT_NEW= "INSERT INTO news( title, full_text, brief_text, img_link) VALUES (?, ?, ?, ?)";
 	public void create(News entity) throws DAOException {
-		String sql = "INSERT INTO news( title, full_text, brief_text, img_link) VALUES ('" + entity.getTitle() + "', '"
-				+ entity.getFullText() + "', '" + entity.getBrief() + "', '" + entity.getImgLink() + "')";
-		try {
-			Class.forName(DB_NEWS_RES_MAN.getValue(DBNewsParameter.DB_NEWS_DRIVER));
-		} catch (ClassNotFoundException e) {
-			throw new DAOException("Class of connection is not found", e);
-		}
+
+
 
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
-				PreparedStatement pr = connection.prepareStatement(sql);) {
+				PreparedStatement pr = connection.prepareStatement(SQL_INSERT_NEW);) {
+			
+			pr.setString(1, entity.getTitle());
+			pr.setString(2, entity.getFullText());
+			pr.setString(3, entity.getBrief());
+			pr.setString(4, entity.getImgLink());
+			
 			System.out.println("Remote DB connection established");
 			pr.executeUpdate();
-		} catch (NullPointerException e) {
-			throw new DAOException("Remote server could not be connected", e);
+		
 		} catch (SQLException e) {
 			throw new DAOException("Remote server could not be connected", e);
 		} catch (ConnectionPoolException e) {
@@ -52,11 +51,8 @@ public class NewsDaoImpl implements NewsDao {
 		String fullText;
 		String brief;
 		String imgLink;
-		try {
-			Class.forName(DB_NEWS_RES_MAN.getValue(DBNewsParameter.DB_NEWS_DRIVER));
-		} catch (ClassNotFoundException e) {
-			throw new DAOException("Class of connection is not found", e);
-		}
+
+
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
 				Statement st = connection.createStatement();
 				ResultSet result = st.executeQuery(sql);) {
@@ -68,9 +64,7 @@ public class NewsDaoImpl implements NewsDao {
 				newsList.add(new News(title, fullText, brief, imgLink));
 				System.out.println(title);
 			}
-		} catch (NullPointerException e) {
-			throw new DAOException("Remote server could not be connected", e);
-		} catch (SQLException e) {
+				} catch (SQLException e) {
 			throw new DAOException("Remote server could not be connected", e);
 		} catch (ConnectionPoolException e) {
 			throw new DAOException("False query", e);

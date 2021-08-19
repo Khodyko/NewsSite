@@ -39,6 +39,7 @@ public class NewsDaoImpl implements NewsDao {
 		} catch (ConnectionPoolException e) {
 			throw new DAOException("False query", e);
 		} catch (Exception e) {
+			
 			throw new DAOException("False query", e);
 			
 		}

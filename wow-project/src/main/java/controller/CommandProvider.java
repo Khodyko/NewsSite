@@ -2,7 +2,6 @@ package controller;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import controllerCommandMethods.GoToAuthorizationPage;
 import controllerCommandMethods.GoToAddNewsPage;
 import controllerCommandMethods.GoToMainPage;

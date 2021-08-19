@@ -1,6 +1,7 @@
 package controllerCommandMethods;
 
 import java.io.IOException;
+import java.lang.invoke.StringConcatFactory;
 
 import bean.RegistrationInfo;
 import bean.RoleEnum;
@@ -38,7 +39,6 @@ public class AuthorizationUser implements Command {
 		try {
 			User user = USER_SERVICE.authorization(info);
 			if (user != null) {
-				System.out.println(user.getRole().toString() + " it is works!!!!!!!!!!!");
 				HttpSession session = request.getSession(true);
 				session.setAttribute("user", user);
 				lastCommandName = "GO_TO_MAIN_PAGE";
@@ -54,7 +54,5 @@ public class AuthorizationUser implements Command {
 			request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 			response.sendRedirect("Controller?commandToController=" + path);
 		}
-
 	}
-
 }

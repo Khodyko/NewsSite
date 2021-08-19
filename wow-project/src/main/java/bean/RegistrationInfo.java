@@ -3,6 +3,7 @@ package bean;
 import java.io.Serializable;
 
 public class RegistrationInfo implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String login;
 	private String password;
 	private RoleEnum role;

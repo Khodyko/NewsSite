@@ -19,8 +19,6 @@ public class ChangeLocal implements Command {
 		} else {
 			String path = "Controller?commandToController=" + lastCommandName;
 			response.sendRedirect(path);
-
 		}
 	}
-
 }

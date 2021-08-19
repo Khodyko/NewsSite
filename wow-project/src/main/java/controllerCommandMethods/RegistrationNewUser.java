@@ -25,6 +25,7 @@ public class RegistrationNewUser implements Command {
 		String password = request.getParameter("password");
 		RoleEnum role = RoleEnum.STANDARD_USER;
 
+
 		if (login == null || login.equals("") || password == null || password.equals("")) {
 			path = "REGISTRATION_PAGE&message=Some of fields are empty, please fill it";
 			lastCommandName = "REGISTRATION_PAGE";
@@ -32,9 +33,9 @@ public class RegistrationNewUser implements Command {
 			response.sendRedirect("Controller?commandToController=" + path);
 			return;
 		}
-
+		
 		RegistrationInfo info = new RegistrationInfo(login, password, role);
-
+		
 		try {
 			userService.registration(info);
 			request.setAttribute("message", "Registration complite, please log in");
@@ -47,9 +48,7 @@ public class RegistrationNewUser implements Command {
 			path = "REGISTRATION_PAGE&message=Registration not complite";
 			lastCommandName = "REGISTRATION_PAGE";
 			request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
-			request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 			response.sendRedirect("Controller?commandToController=" + path);
-
 		}
 	}
 }

@@ -17,7 +17,5 @@ public class GoToAddNewsPage implements Command {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
 		request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 		requestDispatcher.forward(request, response);
-
 	}
-
 }

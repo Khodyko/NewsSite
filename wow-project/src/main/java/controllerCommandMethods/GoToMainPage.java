@@ -17,7 +17,7 @@ import service.ServiceProvider;
 public class GoToMainPage implements Command {
 	private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	private static final NewsService NEWS_SERVICE = PROVIDER.getNewService();
-	String lastCommandName = "GO_TO_MAIN_PAGE";
+	private static final String lastCommandName = "GO_TO_MAIN_PAGE";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

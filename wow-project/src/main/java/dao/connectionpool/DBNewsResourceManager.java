@@ -1,6 +1,5 @@
 package dao.connectionpool;
 
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class DBNewsResourceManager {

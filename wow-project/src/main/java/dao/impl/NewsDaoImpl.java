@@ -47,7 +47,7 @@ public class NewsDaoImpl implements NewsDao {
 		}
 	}
 
-	public List<News> getNewsList(Integer countOf5NewsPage) throws DAOException {
+	public List<News> getNewsList(String countOf5NewsPage) throws DAOException {
 		String sql = "SELECT * FROM news";
 		List<News> newsList = new ArrayList<News>();
 		Integer id;
@@ -59,16 +59,15 @@ public class NewsDaoImpl implements NewsDao {
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
 				Statement st = connection.createStatement();
 				ResultSet result = st.executeQuery(sql);) {
-			
-			while (result.next()) {
+			for(int i=0; i<5;  i++) {
+				if (!result.next()) { break;
+			}
 				id=result.getInt(PARAM_ID);
 				title = result.getString(PARAM_TITLE);
 				brief = result.getString(PARAM_BRIEF);
 				fullText = result.getString(PARAM_FULL_TEXT);
 				imgLink = result.getString(PARAM_IMG_LINK);
-				newsList.add(new News(id, title, fullText, brief, imgLink));
-				System.out.println(title);
-				
+				newsList.add(new News(id, title, fullText, brief, imgLink));				
 			}
 		} catch (SQLException e) {
 			throw new DAOException("Remote server could not be connected", e);
@@ -91,7 +90,7 @@ public class NewsDaoImpl implements NewsDao {
 
 	}
 
-	public Integer getNewsMaxId() throws DAOException {
+	public String getNewsMaxId() throws DAOException {
 //		Integer numberRow=0;
 //		try {
 //			connectionQuery();
@@ -106,6 +105,6 @@ public class NewsDaoImpl implements NewsDao {
 //		catch (Exception e) {
 //				throw new DAOException();
 //			}
-		return 0;
+		return "1";
 	}
 }

@@ -30,7 +30,7 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
-	public List<News> getNewsList(Integer countOf5NewsPage) throws ServiceException {
+	public List<News> getNewsList(String countOf5NewsPage) throws ServiceException {
 		List<News> newsList = new ArrayList<News>();
 		try {
 			newsList = NEWS_DAO_IMPL.getNewsList(countOf5NewsPage);

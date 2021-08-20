@@ -10,9 +10,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import service.NewsService;
-import service.ServiceException;
-import service.ServiceProvider;
 
 public class GoToConcreteNews implements Command {
 
@@ -47,5 +44,4 @@ public class GoToConcreteNews implements Command {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
 		requestDispatcher.forward(request, response);
 		}
-
 }

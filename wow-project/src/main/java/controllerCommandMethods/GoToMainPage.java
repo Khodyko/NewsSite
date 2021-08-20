@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 import bean.News;
 import controller.Command;
 import jakarta.servlet.RequestDispatcher;
@@ -19,15 +21,28 @@ import service.ServiceProvider;
 public class GoToMainPage implements Command {
 	private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	private static final NewsService NEWS_SERVICE = PROVIDER.getNewService();
-	
+		
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path= "/WEB-INF/jsp/main.jsp";
 		String lastCommandName = "GO_TO_MAIN_PAGE";
+		String currentPageNumber;
 		HttpSession session=request.getSession(true);
+		currentPageNumber=(String) session.getAttribute("currentPage");
+		if(currentPageNumber==null || currentPageNumber.equals("") ) {
+			
+			currentPageNumber="1";
+		}
 		try {
-			List<News> newses = NEWS_SERVICE.getNewsList(1);
+			isNumeric(currentPageNumber);
+		} catch (NumberFormatException e) {
+			System.out.println("current Page Number is not a number");
+		}
+		
+		
+		try {
+			List<News> newses = NEWS_SERVICE.getNewsList(currentPageNumber);
 			session.setAttribute("newses", newses);
 		} catch (ServiceException e) {
 			path="/WEB-INF/jsp/unknownPage.jsp";
@@ -40,6 +55,11 @@ public class GoToMainPage implements Command {
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
 		request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 		requestDispatcher.forward(request, response);
+	}
+	
+	public void isNumeric(String pageNumber) throws  NumberFormatException{
+		
+			Integer.parseInt(pageNumber);
 	}
 
 }

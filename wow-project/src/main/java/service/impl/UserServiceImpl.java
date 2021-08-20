@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 	private boolean validation(RegistrationInfo info) throws ServiceException {
 		String login = info.getLogin();
 		String password = info.getPassword();
-		if (login.length() > 5 && password.length() > 5) {
+		if (login.length() >=5 && password.length() >= 5) {
 			return true;
 		} else {
 			throw new ServiceException("Login or password is not valid"); // concrete

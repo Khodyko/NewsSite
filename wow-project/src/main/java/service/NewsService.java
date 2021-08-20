@@ -12,5 +12,7 @@ public interface NewsService {
 	void update(News news) throws ServiceException;
 	
 	List<News> getNewsList(Integer countOf5NewsPage) throws ServiceException;
+	
+	
 
 }

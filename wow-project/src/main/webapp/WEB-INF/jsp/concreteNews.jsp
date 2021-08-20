@@ -75,27 +75,20 @@
 		</form>
 
 	</div>
-	<div style="justify-content: center;">
-		<div style="width: 50%; margin: 0 auto; text-align: center;">
-			<c:forEach var="news" items="${newses}">
-
-				<a href="Controller?commandToController=GO_CONCRETE_NEWS&choosenNewsId=${news.getId()}">
+<div style="justify-content: center;">
+		<div style="width: 80%; margin: 0 auto; text-align: center;">
+						
 					<h1>
-						<c:out value="${news.getTitle()}" />
+						<c:out value="${lastViewedNews.getTitle()}" />
 					</h1>
 
-					<img alt="image" src=<c:out value="${news.getImgLink()}"/>>
+					<img alt="image" src=<c:out value="${lastViewedNews.getImgLink()}"/>>
 
-					<h4>
-						<c:out value="${news.getBrief()}" />
-					</h4>
-					<hr align="center" size="1" color="white" />
-				</a>
-			</c:forEach>
+					<h3>
+						<c:out value="${lastViewedNews.getFullText()}" />
+					</h3>
+				
 		</div>
 	</div>
-	<div class="headline">
-		<div>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1</div>
-	</div>
+
 </body>
-</html>

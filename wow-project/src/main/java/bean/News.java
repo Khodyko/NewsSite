@@ -4,8 +4,12 @@ import java.io.Serializable;
 
 public class News implements Serializable{
 	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private String title;
 	private String brief;
+	
+
+	
 	private String fullText;
 	private String imgLink;
 	
@@ -15,6 +19,27 @@ public class News implements Serializable{
 		this.brief = brief;
 		this.fullText = fullText;
 		this.imgLink = imgLink;
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public News(Integer id, String title, String fullText, String brief, String imgLink) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.brief = brief;
+		this.fullText = fullText;
+		this.imgLink = imgLink;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setFullText(String fullText) {
+		this.fullText = fullText;
 	}
 
 	public String getFullText() {
@@ -50,10 +75,7 @@ public class News implements Serializable{
 		this.brief = brief;
 	}
 
-	@Override
-	public String toString() {
-		return "News [title=" + title + ", brief=" + brief + ", fullText=" + fullText + ", imgLink=" + imgLink + "]";
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -61,6 +83,7 @@ public class News implements Serializable{
 		int result = 1;
 		result = prime * result + ((brief == null) ? 0 : brief.hashCode());
 		result = prime * result + ((fullText == null) ? 0 : fullText.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((imgLink == null) ? 0 : imgLink.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
@@ -85,6 +108,11 @@ public class News implements Serializable{
 				return false;
 		} else if (!fullText.equals(other.fullText))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (imgLink == null) {
 			if (other.imgLink != null)
 				return false;
@@ -97,6 +125,14 @@ public class News implements Serializable{
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "News [id=" + id + ", title=" + title + ", brief=" + brief + ", fullText=" + fullText + ", imgLink="
+				+ imgLink + "]";
+	}
+
+	
 
 	
 	

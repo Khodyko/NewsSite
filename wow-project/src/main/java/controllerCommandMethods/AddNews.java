@@ -91,7 +91,7 @@ public class AddNews implements Command {
 				throw new ServiceException(message);
 			}
 			if(news.getBrief()==null || news.getBrief().equals("")) {
-				if(news.getFullText().length()<41) {
+				if(news.getFullText().length()<100) {
 					news.setBrief(news.getFullText());
 				}
 				else {

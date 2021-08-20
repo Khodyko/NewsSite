@@ -3,6 +3,7 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 import controllerCommandMethods.GoToAuthorizationPage;
+import controllerCommandMethods.GoToConcreteNews;
 import controllerCommandMethods.GoToAddNewsPage;
 import controllerCommandMethods.GoToMainPage;
 import controllerCommandMethods.GoToRegistrationPage;
@@ -24,6 +25,7 @@ public class CommandProvider {
 		commands.put(CommandName.ADD_NEWS, new AddNews());
 		commands.put(CommandName.ADD_NEWS_PAGE, new GoToAddNewsPage());
 		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());
+		commands.put(CommandName.GO_CONCRETE_NEWS, new GoToConcreteNews());
 		commands.put(CommandName.UNKNOWN_COMMAND, new UnknownCommand());
 	}
 

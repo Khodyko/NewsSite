@@ -1,32 +1,22 @@
-
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ page import="bean.News"%>
-<%@ page import="bean.User"%>
-<%@ page import="bean.RoleEnum"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<%@ page import="bean.User"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset="ISO-8859-1">
+<title>Unknown Page</title>
 <link rel="stylesheet" href="resources/css/property.css" type="text/css">
-<title>super</title>
-
-
-
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
-
-
+<fmt:message bundle="${loc}" key="local.unknownpage.field.smthwrong" var="smth_wrong_title" />
+<fmt:message bundle="${loc}" key="local.unknownpage.button.tomainpage" var="to_main_page_btn" />
 <fmt:message bundle="${loc}" key="local.headline.button.name.register" var="register_button" />
 <fmt:message bundle="${loc}" key="local.headline.button.name.addnews" var="add_news_button" />
 <fmt:message bundle="${loc}" key="local.headline.button.name.login" var="login_button" />
-
 </head>
-
+<body>
 <body>
 	<div class="headline">
 
@@ -57,7 +47,6 @@
 			</form>
 		</div>
 	</div>
-
 	<div class="conteiner">
 		<form action="Controller" method="post">
 			<input type="hidden" name="commandToController" value="CHANGE_LOCAL" />
@@ -77,25 +66,18 @@
 	</div>
 	<div style="justify-content: center;">
 		<div style="width: 50%; margin: 0 auto; text-align: center;">
-			<c:forEach var="news" items="${newses}">
+			<img alt="image" src="resources/pictures/smthWrongImg.png" />
 
-				<a href="Controller?commandToController=GO_CONCRETE_NEWS&choosenNewsId=${news.getId()}">
-					<h1>
-						<c:out value="${news.getTitle()}" />
-					</h1>
+			<h1>${smth_wrong_title}</h1>
+		
+			<form action="Controller" method="post">
+				<input type="hidden" name="commandToController" value="GO_TO_MAIN_PAGE" />
+				<button>${to_main_page_btn}</button>
+			</form>
 
-					<img alt="image" src=<c:out value="${news.getImgLink()}"/>>
-
-					<h4>
-						<c:out value="${news.getBrief()}" />
-					</h4>
-					<hr align="center" size="1" color="white" />
-				</a>
-			</c:forEach>
 		</div>
+
 	</div>
-	<div class="headline">
-		<div>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1</div>
-	</div>
+
 </body>
 </html>

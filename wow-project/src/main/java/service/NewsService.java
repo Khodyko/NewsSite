@@ -13,6 +13,8 @@ public interface NewsService {
 	
 	List<News> getNewsList(String countOf5NewsPage) throws ServiceException;
 	
+	public String getNewsMaxNumber() throws ServiceException;
+	
 	
 
 }

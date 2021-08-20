@@ -22,6 +22,7 @@ public class NewsDaoImpl implements NewsDao {
 	private static final String PARAM_IMG_LINK = "img_link";
 	private static final String SQL_INSERT_NEWS = "INSERT INTO news( " + PARAM_TITLE + ", " + PARAM_FULL_TEXT + ", "
 			+ PARAM_BRIEF + ", " + PARAM_IMG_LINK + ") VALUES (?, ?, ?, ?)";
+	private static final String SQL_GET_NUMBER_ROWS = "select count(*) from news";
 
 	public void create(News entity) throws DAOException {
 
@@ -59,15 +60,16 @@ public class NewsDaoImpl implements NewsDao {
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
 				Statement st = connection.createStatement();
 				ResultSet result = st.executeQuery(sql);) {
-			for(int i=0; i<5;  i++) {
-				if (!result.next()) { break;
-			}
-				id=result.getInt(PARAM_ID);
+			for (int i = 0; i < 5; i++) {
+				if (!result.next()) {
+					break;
+				}
+				id = result.getInt(PARAM_ID);
 				title = result.getString(PARAM_TITLE);
 				brief = result.getString(PARAM_BRIEF);
 				fullText = result.getString(PARAM_FULL_TEXT);
 				imgLink = result.getString(PARAM_IMG_LINK);
-				newsList.add(new News(id, title, fullText, brief, imgLink));				
+				newsList.add(new News(id, title, fullText, brief, imgLink));
 			}
 		} catch (SQLException e) {
 			throw new DAOException("Remote server could not be connected", e);
@@ -90,21 +92,24 @@ public class NewsDaoImpl implements NewsDao {
 
 	}
 
-	public String getNewsMaxId() throws DAOException {
-//		Integer numberRow=0;
-//		try {
-//			connectionQuery();
-//			PreparedStatement statement=connection.prepareStatement("select count(*) from dataTable");
-//			    ResultSet rs = statement.executeQuery();
-//			    while(rs.next()){
-//			        numberRow = rs.getInt("count(*)");
-//			    }
-//			System.out.println("PS has gone");	
-//			 connection.close();
-//		}	
-//		catch (Exception e) {
-//				throw new DAOException();
-//			}
-		return "1";
+	public String getNewsMaxNumber() throws DAOException {
+		Integer numberRow = 0;
+		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
+				PreparedStatement statement = connection.prepareStatement(SQL_GET_NUMBER_ROWS);
+				ResultSet rs = statement.executeQuery();) {
+
+						
+			while (rs.next()) {
+				numberRow = rs.getInt("count(*)");
+			}
+			
+		} catch (SQLException e) {
+			throw new DAOException("Remote server could not be connected", e);
+		} catch (ConnectionPoolException e) {
+			throw new DAOException("False query", e);
+		} catch (Exception e) {
+			throw new DAOException();
+		}
+		return numberRow.toString();
 	}
 }

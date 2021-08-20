@@ -28,19 +28,16 @@ public class GoToMainPage implements Command {
 		String path= "/WEB-INF/jsp/main.jsp";
 		String lastCommandName = "GO_TO_MAIN_PAGE";
 		String currentPageNumber;
+		String newsMaxNumber;
 		HttpSession session=request.getSession(true);
 		currentPageNumber=(String) session.getAttribute("currentPage");
-		if(currentPageNumber==null || currentPageNumber.equals("") ) {
-			
-			currentPageNumber="1";
-		}
+		currentPageNumber=pageNumberValidation(currentPageNumber);		
 		try {
-			isNumeric(currentPageNumber);
-		} catch (NumberFormatException e) {
-			System.out.println("current Page Number is not a number");
+			newsMaxNumber=NEWS_SERVICE.getNewsMaxNumber();
+			
+		} catch (ServiceException e) {
+			System.out.println("whats up bro?");
 		}
-		
-		
 		try {
 			List<News> newses = NEWS_SERVICE.getNewsList(currentPageNumber);
 			session.setAttribute("newses", newses);
@@ -57,9 +54,20 @@ public class GoToMainPage implements Command {
 		requestDispatcher.forward(request, response);
 	}
 	
-	public void isNumeric(String pageNumber) throws  NumberFormatException{
+	private String pageNumberValidation(String currentPageNumber) {
 		
-			Integer.parseInt(pageNumber);
+		if(currentPageNumber==null || currentPageNumber.equals("") ) {
+			currentPageNumber="1";
+		}
+		
+		
+		try {
+			Integer.parseInt(currentPageNumber);
+		} catch (NumberFormatException e) {
+			System.out.println("current Page Number is not a number");
+			currentPageNumber="1";
+		}
+		return currentPageNumber;
 	}
 
 }

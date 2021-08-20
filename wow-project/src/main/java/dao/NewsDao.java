@@ -14,5 +14,5 @@ public interface NewsDao {
 
 	void delete(News entity) throws DAOException;
 
-	String getNewsMaxId() throws DAOException;
+	String getNewsMaxNumber() throws DAOException;
 }

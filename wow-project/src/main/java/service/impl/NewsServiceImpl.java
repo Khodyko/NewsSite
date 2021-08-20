@@ -40,4 +40,16 @@ public class NewsServiceImpl implements NewsService {
 		return newsList;
 	}
 
+	@Override
+	public String getNewsMaxNumber() throws ServiceException {
+		String newsMaxNumber;
+		try {
+			newsMaxNumber=NEWS_DAO_IMPL.getNewsMaxNumber();
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e);		}
+		return newsMaxNumber;
+	}
+	
+	
+
 }

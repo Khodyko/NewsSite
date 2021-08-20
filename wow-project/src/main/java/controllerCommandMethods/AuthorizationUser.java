@@ -21,6 +21,7 @@ public class AuthorizationUser implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path;
+		String exceptionMessage = "";
 		String lastCommandName = "AUTHORIZATION_PAGE";
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
@@ -35,19 +36,16 @@ public class AuthorizationUser implements Command {
 		RegistrationInfo info = new RegistrationInfo(login, password, role);
 		try {
 			User user = USER_SERVICE.authorization(info);
-			if (user != null) {
-				HttpSession session = request.getSession(true);
-				session.setAttribute("user", user);
-				lastCommandName = "GO_TO_MAIN_PAGE";
-				session.setAttribute("role", user.getRole().toString());
-				session.setAttribute("lastURL", lastCommandName); // for redirect in localization
-				response.sendRedirect("Controller?commandToController=" + lastCommandName);
-			} else {
-				throw new ServiceException("User is null");
-			}
+			HttpSession session = request.getSession(true);
+			session.setAttribute("user", user);
+			lastCommandName = "GO_TO_MAIN_PAGE";
+			session.setAttribute("role", user.getRole().toString());
+			session.setAttribute("lastURL", lastCommandName); // for redirect in localization
+			response.sendRedirect("Controller?commandToController=" + lastCommandName);
+
 		} catch (ServiceException e) {
-			request.setAttribute("message", "Login or password wrong");
-			path = "AUTHORIZATION_PAGE&message=Registration complite, please log in";
+			exceptionMessage=e.getMessage();
+			path = "AUTHORIZATION_PAGE&message="+exceptionMessage;
 			request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 			response.sendRedirect("Controller?commandToController=" + path);
 		}

@@ -20,7 +20,7 @@ public class NewsServiceImpl implements NewsService {
 		try {
 			NEWS_DAO_IMPL.create(news);
 		} catch (DAOException e) {
-			throw new ServiceException(e);
+			throw new ServiceException(e.getMessage(), e);
 		}
 	}
 
@@ -34,8 +34,8 @@ public class NewsServiceImpl implements NewsService {
 		List<News> newsList = new ArrayList<News>();
 		try {
 			newsList = NEWS_DAO_IMPL.getNewsList(countOf5NewsPage);
-		} catch (Exception e) {
-			throw new ServiceException(e);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e);
 		}
 		return newsList;
 	}

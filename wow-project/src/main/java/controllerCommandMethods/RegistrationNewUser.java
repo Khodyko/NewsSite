@@ -20,6 +20,7 @@ public class RegistrationNewUser implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path;
+		String exceptionMessage="";
 		String lastCommandName = "REGISTRATION_PAGE";
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
@@ -44,8 +45,8 @@ public class RegistrationNewUser implements Command {
 			request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 			response.sendRedirect("Controller?commandToController=" + path);
 		} catch (ServiceException e) {
-			e.printStackTrace();// log
-			path = "REGISTRATION_PAGE&message=Registration not complite";
+			exceptionMessage=e.getMessage();
+			path = "REGISTRATION_PAGE&message="+exceptionMessage;
 			lastCommandName = "REGISTRATION_PAGE";
 			request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 			response.sendRedirect("Controller?commandToController=" + path);

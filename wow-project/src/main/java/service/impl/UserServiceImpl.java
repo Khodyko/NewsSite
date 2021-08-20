@@ -18,35 +18,33 @@ public class UserServiceImpl implements UserService {
 
 	public void registration(RegistrationInfo info) throws ServiceException {
 		try {
-			if (validation(info.getLogin()).equals("valid") || info.getPassword().equals("valid")) {
-				USER_DAO_IMPL.registration(info);
-			} else {
-				throw new ServiceException("Login or password is not valid"); //concrete
-			}
+			validation(info);
+			USER_DAO_IMPL.registration(info);
 		} catch (DAOException e) {
-			throw new ServiceException(e);
+			throw new ServiceException(e.getMessage(), e);
 		}
 	}
 
 	public User authorization(RegistrationInfo info) throws ServiceException {
 		User user = null;
 		try {
-			if (validation(info.getLogin()).equals("valid") || info.getPassword().equals("valid")) {
-				user = USER_DAO_IMPL.authorization(info);
-			} else {
-				throw new ServiceException("Login or password is not valid");//concrete
-			}
+			validation(info);
+			user = USER_DAO_IMPL.authorization(info);
 		} catch (DAOException e) {
-			throw new ServiceException(e);
+			
+			throw new ServiceException(e.getMessage(), e);
 		}
+		if(user==null) {throw new ServiceException("User is not found");}
 		return user;
 	}
 
-	private String validation(String string) {
-		if (string.length() < 5) {
-			return "Use at least 5 characters";
+	private boolean validation(RegistrationInfo info) throws ServiceException {
+		String login = info.getLogin();
+		String password = info.getPassword();
+		if (login.length() > 5 && password.length() > 5) {
+			return true;
 		} else {
-			return "valid";
+			throw new ServiceException("Login or password is not valid"); // concrete
 		}
 	}
 

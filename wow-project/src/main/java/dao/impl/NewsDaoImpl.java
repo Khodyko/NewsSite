@@ -23,7 +23,8 @@ public class NewsDaoImpl implements NewsDao {
 	private static final String SQL_INSERT_NEWS = "INSERT INTO news( " + PARAM_TITLE + ", " + PARAM_FULL_TEXT + ", "
 			+ PARAM_BRIEF + ", " + PARAM_IMG_LINK + ") VALUES (?, ?, ?, ?)";
 	private static final String SQL_GET_NUMBER_ROWS = "select count(*) from news";
-
+	private static final String SQL_GET_NEWS_LIST = "SELECT * FROM news";
+	
 	public void create(News entity) throws DAOException {
 
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
@@ -48,8 +49,8 @@ public class NewsDaoImpl implements NewsDao {
 		}
 	}
 
-	public List<News> getNewsList(String countOf5NewsPage) throws DAOException {
-		String sql = "SELECT * FROM news";
+	public List<News> getNewsList(Integer countOf5NewsPage) throws DAOException {
+		
 		List<News> newsList = new ArrayList<News>();
 		Integer id;
 		String title;
@@ -59,8 +60,9 @@ public class NewsDaoImpl implements NewsDao {
 		
 
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
-				Statement st = connection.createStatement();
-				ResultSet result = st.executeQuery(sql);) {
+				Statement st = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+				ResultSet result = st.executeQuery(SQL_GET_NEWS_LIST);) {
+			result.absolute(countOf5NewsPage-1);	
 			for (int i = 0; i < 5; i++) {
 				if (!result.next()) {
 					break;
@@ -93,7 +95,7 @@ public class NewsDaoImpl implements NewsDao {
 
 	}
 
-	public String getNewsMaxNumber() throws DAOException {
+	public Integer getNewsMaxNumber() throws DAOException {
 		Integer numberRow = 0;
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
 				PreparedStatement statement = connection.prepareStatement(SQL_GET_NUMBER_ROWS);
@@ -111,6 +113,6 @@ public class NewsDaoImpl implements NewsDao {
 		} catch (Exception e) {
 			throw new DAOException();
 		}
-		return numberRow.toString();
+		return numberRow;
 	}
 }

@@ -11,9 +11,9 @@ public interface NewsService {
 
 	void update(News news) throws ServiceException;
 	
-	List<News> getNewsList(String countOf5NewsPage) throws ServiceException;
+	List<News> getNewsList(Integer currentPageNumber) throws ServiceException;
 	
-	public String getNewsMaxNumber() throws ServiceException;
+	public Integer getNewsMaxNumber() throws ServiceException;
 	
 	
 

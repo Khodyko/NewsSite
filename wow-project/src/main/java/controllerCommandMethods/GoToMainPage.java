@@ -25,17 +25,17 @@ public class GoToMainPage implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = "/WEB-INF/jsp/main.jsp";
 		String lastCommandName = "GO_TO_MAIN_PAGE";
-		String currentPageNumber;
-		String newsMaxNum = "1";
+		Integer currentPageNumber;
+		
 		Integer pagesMaxNum=1;
-		List<String> numberOfPageList = null;
+		List<Integer> numberOfPageList = null;
 		HttpSession session = request.getSession(true);
 		
 
 		try {
-			newsMaxNum = NEWS_SERVICE.getNewsMaxNumber();
-			pagesMaxNum=Integer.parseInt(newsMaxNum)%5+Integer.parseInt(newsMaxNum)/5;
-
+			pagesMaxNum = NEWS_SERVICE.getNewsMaxNumber();
+			pagesMaxNum=(pagesMaxNum%5)>0?pagesMaxNum/5+1:pagesMaxNum/5;
+			
 		} catch (ServiceException e) {
 			path = "/WEB-INF/jsp/unknownPage.jsp";
 			lastCommandName = "UNKNOWN_COMMAND";
@@ -44,17 +44,18 @@ public class GoToMainPage implements Command {
 			return;
 		}
 		
-			numberOfPageList = new ArrayList<String>();
+			numberOfPageList = new ArrayList<Integer>();
 			for (Integer i = 1; i <= pagesMaxNum; i++) {
-				numberOfPageList.add(i.toString());
+				numberOfPageList.add(i);
 			}
 			
 			Collections.sort(numberOfPageList);
 			
-			currentPageNumber = (String) session.getAttribute("currentPage");
-			currentPageNumber = pageNumberValidation(currentPageNumber);
+			currentPageNumber = pageNumberConverter( request.getParameter("requestCurrentPage"));
+			System.out.println("currentPageNumber "+ currentPageNumber);
+		
 			if(!numberOfPageList.contains(currentPageNumber)) {
-				currentPageNumber="1";
+				currentPageNumber=1;
 			}
 			session.setAttribute("currentPage", currentPageNumber);
 			session.setAttribute("pageNumList", numberOfPageList);
@@ -76,18 +77,14 @@ public class GoToMainPage implements Command {
 		requestDispatcher.forward(request, response);
 	}
 
-	private String pageNumberValidation(String currentPageNumber) {
+	private Integer pageNumberConverter(String currentPageNumber) {
 
 		if (currentPageNumber == null || currentPageNumber.equals("")) {
 			currentPageNumber = "1";
 		}
-		try {
-			Integer.parseInt(currentPageNumber);
-		} catch (NumberFormatException e) {
-			System.out.println("current Page Number is not a number");
-			currentPageNumber = "1";
-		}
-		return currentPageNumber;
+		
+		
+		return Integer.parseInt(currentPageNumber);
 	}
 
 }

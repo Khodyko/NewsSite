@@ -14,7 +14,39 @@
 <meta charset="utf-8">
 <link rel="stylesheet" href="resources/css/property.css" type="text/css">
 <title>super</title>
+<style>
+.pagination {
+	border-top: 1px white solid;
+	margin: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
+	height: 50px;
+	background-color: black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: black;
+}
+/* Pagination links */
+.pagination a {
+	color: white;
+	float: center;
+	padding: 8px 16px;
+	text-decoration: none;
+	transition: background-color .3s;
+}
 
+/* Style the active/current link */
+.pagination a.active {
+	background-color: #cd0000;
+	color: white;
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {
+	background-color: #ddd;
+}
+</style>
 
 
 <fmt:setLocale value="${sessionScope.local}" />
@@ -79,11 +111,10 @@
 		<div style="width: 50%; margin: 0 auto; text-align: center;">
 			<c:forEach var="news" items="${newses}">
 
-				<a href="Controller?commandToController=GO_CONCRETE_NEWS&choosenNewsId=${news.getId()}">
+				<a href="Controller?commandToController=GO_CONCRETE_NEWS&choosenNewsId=${news.getId()}" style="text-decoration: none;">
 					<h1>
 						<c:out value="${news.getTitle()}" />
 					</h1>
-
 					<img alt="image" src=<c:out value="${news.getImgLink()}"/>>
 
 					<h4>
@@ -94,8 +125,20 @@
 			</c:forEach>
 		</div>
 	</div>
-	<div class="headline">
-		<div>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1</div>
+
+	<div class="pagination" style="width: 50%; margin: 0 auto; text-align: center;">
+		<a href="#">&laquo; </a>
+		<c:forEach var="page" items="${pageNumList}">
+			<c:if test="${page != currentPage}">
+				<a href="Controller?commandToController=GO_TO_MAIN_PAGE&currentPage=${page}">${page}</a>
+			</c:if>
+			<c:if test="${page == currentPage}">
+				<a class="active" href="#">${page}</a>
+			</c:if>
+		</c:forEach>
+		
+		<a href="#">&raquo;</a>
 	</div>
+
 </body>
 </html>

@@ -56,6 +56,7 @@ public class NewsDaoImpl implements NewsDao {
 		String fullText;
 		String brief;
 		String imgLink;
+		
 
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
 				Statement st = connection.createStatement();

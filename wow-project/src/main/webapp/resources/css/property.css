@@ -1,6 +1,7 @@
+
+
 body {
 	background-color: black
-	
 }
 
 h1 {
@@ -74,12 +75,9 @@ button {
 }
 
 .news_div {
-	
 	text-align: center;
 	display: flex;
 	flex-direction: column;
-
-
 }
 
 .headline {
@@ -92,6 +90,19 @@ button {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.footerline {
+	border-top: 1px white solid;
+	margin: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
+	height: 50px;
+	background-color: black;
+	display: flex;
+	
+	align-items: center;
+	justify-content: center;
 }
 
 input {
@@ -116,3 +127,4 @@ input[type=submit] {
 	size: 10px;
 	text-align: center
 }
+

@@ -20,9 +20,11 @@
 <body>
 	<div class="headline">
 
-		<h1 style="margin: 20px; background-color: #cd0000">
-			<span>News </span>
-		</h1>
+		<a href="Controller?commandToController=GO_TO_MAIN_PAGE" style="text-decoration: none;">
+			<h1 style="margin: 20px; background-color: #cd0000">
+				<span>News </span>
+			</h1>
+		</a>
 		<div class="conteiner">
 			<c:if test="${sessionScope.user != null}">
 				<%
@@ -69,7 +71,7 @@
 			<img alt="image" src="resources/pictures/smthWrongImg.png" />
 
 			<h1>${smth_wrong_title}</h1>
-		
+
 			<form action="Controller" method="post">
 				<input type="hidden" name="commandToController" value="GO_TO_MAIN_PAGE" />
 				<button>${to_main_page_btn}</button>

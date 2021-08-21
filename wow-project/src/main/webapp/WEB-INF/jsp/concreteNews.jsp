@@ -30,9 +30,11 @@
 <body>
 	<div class="headline">
 
-		<h1 style="margin: 20px; background-color: #cd0000">
-			<span>News </span>
-		</h1>
+		<a href="Controller?commandToController=GO_TO_MAIN_PAGE" style="text-decoration: none;">
+			<h1 style="margin: 20px; background-color: #cd0000">
+				<span>News </span>
+			</h1>
+		</a>
 		<div class="conteiner">
 			<c:if test="${sessionScope.user != null}">
 				<%
@@ -75,19 +77,19 @@
 		</form>
 
 	</div>
-<div style="justify-content: center;">
+	<div style="justify-content: center;">
 		<div style="width: 80%; margin: 0 auto; text-align: center;">
-						
-					<h1>
-						<c:out value="${lastViewedNews.getTitle()}" />
-					</h1>
 
-					<img alt="image" src=<c:out value="${lastViewedNews.getImgLink()}"/>>
+			<h1>
+				<c:out value="${lastViewedNews.getTitle()}" />
+			</h1>
 
-					<h3>
-						<c:out value="${lastViewedNews.getFullText()}" />
-					</h3>
-				
+			<img alt="image" src=<c:out value="${lastViewedNews.getImgLink()}"/>>
+
+			<h3>
+				<c:out value="${lastViewedNews.getFullText()}" />
+			</h3>
+
 		</div>
 	</div>
 

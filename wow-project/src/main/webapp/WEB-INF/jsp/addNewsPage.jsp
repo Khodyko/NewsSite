@@ -20,11 +20,13 @@
 <body>
 	<div class="headline">
 
-		<h1 style="margin: 20px; background-color: #cd0000">
-			<span>News </span>
-		</h1>
+		<a href="Controller?commandToController=GO_TO_MAIN_PAGE" style="text-decoration: none;">
+			<h1 style="margin: 20px; background-color: #cd0000">
+				<span>News </span>
+			</h1>
+		</a>
 		<div class="conteiner">
-		<c:if test="${sessionScope.user != null}">
+			<c:if test="${sessionScope.user != null}">
 				<%
 				String UserRole = (((User) request.getSession(false).getAttribute("user")).getRole()).toString();
 				request.setAttribute("UserRole", UserRole);
@@ -37,7 +39,7 @@
 					</form>
 				</c:if>
 			</c:if>
-			
+
 			<form action="Controller" method="post">
 				<input type="hidden" name="commandToController" value="REGISTRATION_PAGE" />
 				<button>${register_button}</button>
@@ -46,7 +48,7 @@
 				<input type="hidden" name="commandToController" value="2	AUTHORIZATION_PAGE" />
 				<button>${login_button}</button>
 			</form>
-	</div>
+		</div>
 	</div>
 	<div class="conteiner">
 		<form action="Controller" method="post">

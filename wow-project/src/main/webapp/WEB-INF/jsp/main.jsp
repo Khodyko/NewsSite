@@ -62,9 +62,11 @@
 <body>
 	<div class="headline">
 
-		<h1 style="margin: 20px; background-color: #cd0000">
-			<span>News </span>
-		</h1>
+		<a href="Controller?commandToController=GO_TO_MAIN_PAGE" style="text-decoration: none;">
+			<h1 style="margin: 20px; background-color: #cd0000">
+				<span>News </span>
+			</h1>
+		</a>
 		<div class="conteiner">
 			<c:if test="${sessionScope.user != null}">
 				<%

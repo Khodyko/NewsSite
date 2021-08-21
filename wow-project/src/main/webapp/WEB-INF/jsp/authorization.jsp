@@ -27,11 +27,13 @@
 <body>
 	<div class="headline">
 
-		<h1 style="margin: 20px; background-color: #cd0000">
-			<span>News </span>
-		</h1>
+		<a href="Controller?commandToController=GO_TO_MAIN_PAGE" style="text-decoration: none;">
+			<h1 style="margin: 20px; background-color: #cd0000">
+				<span>News </span>
+			</h1>
+		</a>
 		<div class="conteiner">
-		<c:if test="${sessionScope.user != null}">
+			<c:if test="${sessionScope.user != null}">
 				<%
 				String UserRole = (((User) request.getSession(false).getAttribute("user")).getRole()).toString();
 				request.setAttribute("UserRole", UserRole);
@@ -45,7 +47,7 @@
 				</c:if>
 			</c:if>
 
-			
+
 			<form action="Controller" method="post">
 				<input type="hidden" name="commandToController" value="REGISTRATION_PAGE" />
 				<button>${register_button}</button>
@@ -54,7 +56,7 @@
 				<input type="hidden" name="commandToController" value="AUTHORIZATION_PAGE" />
 				<button>${login_button}</button>
 			</form>
-	</div>
+		</div>
 	</div>
 	<div class="conteiner">
 		<form action="Controller" method="post">
@@ -75,12 +77,15 @@
 	</div>
 
 	<div class="registrationDiv">
-		<h2 style="font-weight: 600;">MD-JD2-76-21</h2> <font style="text-size: 16; font-weight: 600;">${head1_text}</font>
-		<div style="display: flex; flex-direction: column;"><font style="text-size: 5;">${head2_text}</font>
+		<h2 style="font-weight: 600;">MD-JD2-76-21</h2>
+		<font style="text-size: 16; font-weight: 600;">${head1_text}</font>
+		<div style="display: flex; flex-direction: column;">
+			<font style="text-size: 5;">${head2_text}</font>
 			<form action="Controller" method="post">
 				<input type="hidden" name="commandToController" value="REGISTRATION_PAGE" />
 				<a href="http://localhost:8080/wow-project/Controller?commandToController=REGISTRATION_PAGE">${link_register_page}</a>
-			</form></div>
+			</form>
+		</div>
 		<form action="Controller" method="post" style="color: white">
 			<br />
 			<br />
@@ -94,14 +99,15 @@
 			<br />
 			<input type="submit" value="${send_button}" class="redbutton1" />
 			<br />
-		</form> <font class="systemMessage"> <%
+		</form>
+		<font class="systemMessage"> <%
  String message = (String) request.getParameter("message");
  if (message != null) {
  	out.print(message);
  }
  %>
 
-	</font>
+		</font>
 	</div>
 
 </body>

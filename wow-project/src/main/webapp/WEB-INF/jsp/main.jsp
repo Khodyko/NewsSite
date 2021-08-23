@@ -60,15 +60,12 @@
 </head>
 
 <body>
-	<div class="headline">
-
-		<a href="Controller?commandToController=GO_TO_MAIN_PAGE" style="text-decoration: none;">
+	<div class="headline"><a href="Controller?commandToController=GO_TO_MAIN_PAGE" style="text-decoration: none;">
 			<h1 style="margin: 20px; background-color: #cd0000">
 				<span>News </span>
 			</h1>
 		</a>
-		<div class="conteiner">
-			<c:if test="${sessionScope.user != null}">
+		<div class="conteiner"><c:if test="${sessionScope.user != null}">
 				<%
 				String UserRole = (((User) request.getSession(false).getAttribute("user")).getRole()).toString();
 				request.setAttribute("UserRole", UserRole);
@@ -88,9 +85,7 @@
 			<form action="Controller" method="post">
 				<input type="hidden" name="commandToController" value="AUTHORIZATION_PAGE" />
 				<button>${login_button}</button>
-			</form>
-		</div>
-	</div>
+			</form></div></div>
 
 	<div class="conteiner">
 		<form action="Controller" method="post">
@@ -110,8 +105,7 @@
 
 	</div>
 	<div style="justify-content: center;">
-		<div style="width: 50%; margin: 0 auto; text-align: center;">
-			<c:forEach var="news" items="${newses}">
+		<div style="width: 50%; margin: 0 auto; text-align: center;"><c:forEach var="news" items="${newses}">
 
 				<a href="Controller?commandToController=GO_CONCRETE_NEWS&choosenNewsId=${news.getId()}" style="text-decoration: none;">
 					<h1>
@@ -122,29 +116,28 @@
 					<h4>
 						<c:out value="${news.getBrief()}" />
 					</h4>
+					<div style="">
+						<div class="conteiner"><a href="Controller?commandToController=DELETE_NEWS&choosenNewsId=${news.getId()}" style="text-decoration: none;"left";">Delete
+								news</a></div>
+						<div class="conteiner"><a href="#" style="text-decoration: none;"right";">Update news</a></div>
+					</div>
 					<hr align="center" size="1" color="white" />
 				</a>
-			</c:forEach>
-		</div>
+			</c:forEach></div>
 	</div>
 
-	<div class="pagination" style="width: 50%; margin: 0 auto; text-align: center;">
-		<c:if test="${currentPage>1}">
-		<a href="Controller?commandToController=GO_TO_MAIN_PAGE&requestCurrentPage=${pageNumList.get(currentPage-2)}">&laquo;</a>
-		</c:if>
-		
-			<c:forEach var="page" items="${pageNumList}">
+	<div class="pagination" style="width: 50%; margin: 0 auto; text-align: center;"><c:if test="${currentPage>1}">
+			<a href="Controller?commandToController=GO_TO_MAIN_PAGE&requestCurrentPage=${pageNumList.get(currentPage-2)}">&laquo;</a>
+		</c:if> <c:forEach var="page" items="${pageNumList}">
 			<c:if test="${page != currentPage}">
 				<a href="Controller?commandToController=GO_TO_MAIN_PAGE&requestCurrentPage=${page}">${page}</a>
 			</c:if>
 			<c:if test="${page == currentPage}">
 				<a class="active" href="#">${page}</a>
 			</c:if>
-		</c:forEach>
-		<c:if test="${pageNumList.size()>currentPage}">
-		<a href="Controller?commandToController=GO_TO_MAIN_PAGE&requestCurrentPage=${pageNumList.get(currentPage)}">&raquo;</a>
-		</c:if>
-	</div>
+		</c:forEach> <c:if test="${pageNumList.size()>currentPage}">
+			<a href="Controller?commandToController=GO_TO_MAIN_PAGE&requestCurrentPage=${pageNumList.get(currentPage)}">&raquo;</a>
+		</c:if></div>
 
 </body>
 </html>

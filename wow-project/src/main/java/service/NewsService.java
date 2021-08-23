@@ -15,6 +15,8 @@ public interface NewsService {
 	
 	public Integer getNewsMaxNumber() throws ServiceException;
 	
+	public void deleteNews(News news) throws ServiceException;
+	
 	
 
 }

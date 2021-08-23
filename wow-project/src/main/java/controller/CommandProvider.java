@@ -12,6 +12,7 @@ import controllerCommandMethods.UnknownCommand;
 import controllerCommandMethods.AddNews;
 import controllerCommandMethods.AuthorizationUser;
 import controllerCommandMethods.ChangeLocal;
+import controllerCommandMethods.DeleteNews;
 
 public class CommandProvider {
 	private Map<CommandName, Command> commands = new HashMap<>();
@@ -26,8 +27,9 @@ public class CommandProvider {
 		commands.put(CommandName.ADD_NEWS_PAGE, new GoToAddNewsPage());
 		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());
 		commands.put(CommandName.GO_CONCRETE_NEWS, new GoToConcreteNews());
+		commands.put(CommandName.DELETE_NEWS, new DeleteNews());
 		commands.put(CommandName.UNKNOWN_COMMAND, new UnknownCommand());
-	}
+			}
 
 	public Command findCommand(String name) {
 		if (name == null) {

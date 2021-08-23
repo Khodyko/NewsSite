@@ -92,6 +92,19 @@ button {
 	align-items: center;
 }
 
+.change_news_line{
+	
+	margin: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	height: 5px;
+	background-color: black;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	
+}
+
 .footerline {
 	border-top: 1px white solid;
 	margin: 20px;

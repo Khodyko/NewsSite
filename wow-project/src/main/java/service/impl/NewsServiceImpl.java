@@ -49,6 +49,16 @@ public class NewsServiceImpl implements NewsService {
 			throw new ServiceException(e.getMessage(), e);		}
 		return newsMaxNumber;
 	}
+
+	@Override
+	public void deleteNews(News news) throws ServiceException {
+				try {
+					NEWS_DAO_IMPL.delete(news);
+				} catch (DAOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	}
 	
 	
 

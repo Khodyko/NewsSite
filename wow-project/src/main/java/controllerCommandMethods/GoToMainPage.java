@@ -35,7 +35,6 @@ public class GoToMainPage implements Command {
 		try {
 			pagesMaxNum = NEWS_SERVICE.getNewsMaxNumber();
 			pagesMaxNum=(pagesMaxNum%5)>0?pagesMaxNum/5+1:pagesMaxNum/5;
-			
 		} catch (ServiceException e) {
 			path = "/WEB-INF/jsp/unknownPage.jsp";
 			lastCommandName = "UNKNOWN_COMMAND";
@@ -52,7 +51,7 @@ public class GoToMainPage implements Command {
 			Collections.sort(numberOfPageList);
 			
 			currentPageNumber = pageNumberConverter( request.getParameter("requestCurrentPage"));
-			System.out.println("currentPageNumber "+ currentPageNumber);
+			
 		
 			if(!numberOfPageList.contains(currentPageNumber)) {
 				currentPageNumber=1;

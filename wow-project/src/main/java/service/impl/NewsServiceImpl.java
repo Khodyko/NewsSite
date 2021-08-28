@@ -16,7 +16,7 @@ public class NewsServiceImpl implements NewsService {
 	private static final NewsDao NEWS_DAO_IMPL = DAO_PROVIDER.getNewDao();
 
 	@Override
-	public void create(News news) throws ServiceException{
+	public void create(News news) throws ServiceException {
 		try {
 			NEWS_DAO_IMPL.create(news);
 		} catch (DAOException e) {
@@ -44,22 +44,32 @@ public class NewsServiceImpl implements NewsService {
 	public Integer getNewsMaxNumber() throws ServiceException {
 		Integer newsMaxNumber;
 		try {
-			newsMaxNumber=NEWS_DAO_IMPL.getNewsMaxNumber();
+			newsMaxNumber = NEWS_DAO_IMPL.getNewsMaxNumber();
 		} catch (DAOException e) {
-			throw new ServiceException(e.getMessage(), e);		}
+			throw new ServiceException(e.getMessage(), e);
+		}
 		return newsMaxNumber;
 	}
 
 	@Override
-	public void deleteNews(News news) throws ServiceException {
-				try {
-					NEWS_DAO_IMPL.delete(news);
-				} catch (DAOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	public void deleteNews(Integer id) throws ServiceException {
+		try {
+			NEWS_DAO_IMPL.delete(id);
+		} catch (DAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
-	
+
+	@Override
+	public News getNews(Integer chosenId) throws ServiceException {
+		News news = null;
+		try {
+			news = NEWS_DAO_IMPL.getNews(chosenId);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e);
+		}
+		return news;
+	}
 
 }

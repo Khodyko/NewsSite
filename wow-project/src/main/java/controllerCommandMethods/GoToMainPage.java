@@ -25,10 +25,10 @@ public class GoToMainPage implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = "/WEB-INF/jsp/main.jsp";
 		String lastCommandName = "GO_TO_MAIN_PAGE";
-		Integer currentPageNumber;
+		Integer currentPageNumber=1;
 		
 		Integer pagesMaxNum=1;
-		List<Integer> numberOfPageList = null;
+		
 		HttpSession session = request.getSession(true);
 		
 
@@ -43,26 +43,21 @@ public class GoToMainPage implements Command {
 			return;
 		}
 		
-			numberOfPageList = new ArrayList<Integer>();
-			for (Integer i = 1; i <= pagesMaxNum; i++) {
-				numberOfPageList.add(i);
-			}
 			
-			Collections.sort(numberOfPageList);
-			
-			currentPageNumber = pageNumberConverter( request.getParameter("requestCurrentPage"));
+			currentPageNumber = pageNumberConverter( request.getParameter("currentPage"));
 			
 		
-			if(!numberOfPageList.contains(currentPageNumber)) {
+			if(pagesMaxNum<(currentPageNumber)) {
 				currentPageNumber=1;
 			}
-			session.setAttribute("currentPage", currentPageNumber);
-			session.setAttribute("pageNumList", numberOfPageList);
+
+			request.setAttribute("currentPage", currentPageNumber);
+			request.setAttribute("pagesMaxNum", pagesMaxNum);
 			
 
 		try {
 			List<News> newses = NEWS_SERVICE.getNewsList(currentPageNumber);
-			session.setAttribute("newses", newses);
+			request.setAttribute("newses", newses);
 		} catch (ServiceException e) {
 			path = "/WEB-INF/jsp/unknownPage.jsp";
 			lastCommandName = "UNKNOWN_COMMAND";
@@ -70,7 +65,7 @@ public class GoToMainPage implements Command {
 			response.sendRedirect("Controller?commandToController=" + path);
 			return;
 		}
-
+		lastCommandName="GO_TO_MAIN_PAGE&currentPage="+currentPageNumber;
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
 		request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 		requestDispatcher.forward(request, response);

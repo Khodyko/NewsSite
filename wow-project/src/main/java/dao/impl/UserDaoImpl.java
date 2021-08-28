@@ -18,7 +18,8 @@ public class UserDaoImpl implements UserDao {
 	private static final String PARAMETR_PASSWORD = "password";
 	private static final String PARAMETR_ROLE = "role";
 	private static final String SQL_INSERT_USER = "INSERT INTO users(user_name, password, role) VALUES (?, ?, ?)";
-	private static String SQL_GET_AUTHORIZATION = "SELECT * from users WHERE("+PARAMETR_NAME+"= ? AND "+PARAMETR_PASSWORD+"= ?)";
+	private static String SQL_GET_AUTHORIZATION = "SELECT * from users WHERE(" + PARAMETR_NAME + "= ? AND "
+			+ PARAMETR_PASSWORD + "= ?)";
 
 	public void registration(RegistrationInfo entity) throws DAOException {
 
@@ -62,7 +63,7 @@ public class UserDaoImpl implements UserDao {
 				}
 			}
 			return sqlUser;
-	
+
 		} catch (SQLException e) {
 			throw new DAOException("Remote server could not be connected SQLException", e);
 		} catch (ConnectionPoolException e) {

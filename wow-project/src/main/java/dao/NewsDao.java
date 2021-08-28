@@ -12,7 +12,9 @@ public interface NewsDao {
 
 	void update(News entity) throws DAOException;
 
-	void delete(News entity) throws DAOException;
+	void delete(Integer id) throws DAOException;
 
 	Integer getNewsMaxNumber() throws DAOException;
+
+	News getNews(Integer chosenId) throws DAOException;
 }

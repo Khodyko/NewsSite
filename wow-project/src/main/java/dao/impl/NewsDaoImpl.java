@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthScrollBarUI;
+
 import bean.News;
 import dao.DAOException;
 import dao.NewsDao;
@@ -24,8 +26,9 @@ public class NewsDaoImpl implements NewsDao {
 			+ PARAM_BRIEF + ", " + PARAM_IMG_LINK + ") VALUES (?, ?, ?, ?)";
 	private static final String SQL_GET_NUMBER_ROWS = "select count(*) from news";
 	private static final String SQL_GET_NEWS_LIST = "SELECT * FROM news";
-	private static final String SQL_DELETE_NEWS = "DELETE FROM news WHERE("+PARAM_ID+"=?)";
-													
+	private static final String SQL_DELETE_NEWS = "DELETE FROM news WHERE(" + PARAM_ID + "=?)";
+	private static final String SQL_GET_NEWS_BY_ID = "SELECT * FROM news WHERE(" + PARAM_ID + "=?)";
+
 	public void create(News entity) throws DAOException {
 
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
@@ -51,19 +54,18 @@ public class NewsDaoImpl implements NewsDao {
 	}
 
 	public List<News> getNewsList(Integer countOf5NewsPage) throws DAOException {
-		
+
 		List<News> newsList = new ArrayList<News>();
 		Integer id;
 		String title;
 		String fullText;
 		String brief;
 		String imgLink;
-		
 
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
 				Statement st = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 				ResultSet result = st.executeQuery(SQL_GET_NEWS_LIST);) {
-			result.absolute(countOf5NewsPage+(countOf5NewsPage-1)*4-1);	
+			result.absolute(countOf5NewsPage + (countOf5NewsPage - 1) * 4 - 1);
 			for (int i = 0; i < 5; i++) {
 				if (!result.next()) {
 					break;
@@ -91,12 +93,11 @@ public class NewsDaoImpl implements NewsDao {
 
 	}
 
-	public void delete(News entity) throws DAOException {
+	public void delete(Integer id) throws DAOException {
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
 				PreparedStatement pr = connection.prepareStatement(SQL_DELETE_NEWS);) {
 
-			pr.setInt(1, entity.getId());
-			
+			pr.setInt(1, id);
 
 			pr.executeUpdate();
 
@@ -118,11 +119,10 @@ public class NewsDaoImpl implements NewsDao {
 				PreparedStatement statement = connection.prepareStatement(SQL_GET_NUMBER_ROWS);
 				ResultSet rs = statement.executeQuery();) {
 
-						
 			while (rs.next()) {
 				numberRow = rs.getInt("count(*)");
 			}
-			
+
 		} catch (SQLException e) {
 			throw new DAOException("Remote server could not be connected", e);
 		} catch (ConnectionPoolException e) {
@@ -131,5 +131,39 @@ public class NewsDaoImpl implements NewsDao {
 			throw new DAOException();
 		}
 		return numberRow;
+	}
+
+	public News getNews(Integer chosenId) throws DAOException {
+		News news = null;
+
+		Integer id;
+		String title;
+		String fullText;
+		String brief;
+		String imgLink;
+
+		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
+				PreparedStatement st = connection.prepareStatement(SQL_GET_NEWS_BY_ID);) {
+			st.setInt(1, chosenId);
+			ResultSet result = st.executeQuery();
+			while (result.next()) {
+
+				id = result.getInt(PARAM_ID);
+				title = result.getString(PARAM_TITLE);
+				brief = result.getString(PARAM_BRIEF);
+				fullText = result.getString(PARAM_FULL_TEXT);
+				imgLink = result.getString(PARAM_IMG_LINK);
+				news = new News(id, title, fullText, brief, imgLink);
+			}
+
+		} catch (SQLException e) {
+			throw new DAOException("Remote server could not be connected", e);
+		} catch (ConnectionPoolException e) {
+			throw new DAOException("False query", e);
+		} catch (Exception e) {
+			throw new DAOException("False query", e);
+		}
+
+		return news;
 	}
 }

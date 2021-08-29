@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ page import="bean.News"%>
-<%@ page import="bean.User"%>
+<%@ page import="by.hodyko.www.bean.News"%>
+<%@ page import="by.hodyko.www.bean.User"%>
 <!DOCTYPE html>
 <html>
 <head>

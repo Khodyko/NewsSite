@@ -1,8 +1,8 @@
 
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ page import="bean.News"%>
-<%@ page import="bean.User"%>
-<%@ page import="bean.RoleEnum"%>
+<%@ page import="by.hodyko.www.bean.News"%>
+<%@ page import="by.hodyko.www.bean.User"%>
+<%@ page import="by.hodyko.www.bean.RoleEnum"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>

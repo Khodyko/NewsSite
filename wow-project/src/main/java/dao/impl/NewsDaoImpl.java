@@ -28,7 +28,9 @@ public class NewsDaoImpl implements NewsDao {
 	private static final String SQL_GET_NEWS_LIST = "SELECT * FROM news";
 	private static final String SQL_DELETE_NEWS = "DELETE FROM news WHERE(" + PARAM_ID + "=?)";
 	private static final String SQL_GET_NEWS_BY_ID = "SELECT * FROM news WHERE(" + PARAM_ID + "=?)";
-
+	private static final String SQL_UPDATE_NEWS = "UPDATE news SET  " + PARAM_TITLE + "=? , " + PARAM_FULL_TEXT + "=? , "
+			+ PARAM_BRIEF + "= ?, " + PARAM_IMG_LINK + "=?   WHERE (" + PARAM_ID + "=?)";
+	
 	public void create(News entity) throws DAOException {
 
 		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
@@ -89,7 +91,26 @@ public class NewsDaoImpl implements NewsDao {
 	}
 
 	public void update(News entity) throws DAOException {
-		// TODO Auto-generated method stub
+		try (Connection connection = NewsConnectionPool.getInstance().takeConnection();
+				PreparedStatement pr = connection.prepareStatement(SQL_UPDATE_NEWS);) {
+
+			pr.setString(1, entity.getTitle());
+			pr.setString(2, entity.getFullText());
+			pr.setString(3, entity.getBrief());
+			pr.setString(4, entity.getImgLink());
+			pr.setInt(5, entity.getId());
+
+			System.out.println("Remote DB connection established");
+			pr.executeUpdate();
+
+		} catch (SQLException e) {
+			throw new DAOException("Remote server could not be connected", e);
+		} catch (ConnectionPoolException e) {
+			throw new DAOException("False query", e);
+		} catch (Exception e) {
+			throw new DAOException("False query", e);
+
+		}
 
 	}
 

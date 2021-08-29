@@ -81,13 +81,13 @@
 		<div style="width: 80%; margin: 0 auto; text-align: center;">
 
 			<h1>
-				<c:out value="${lastViewedNews.getTitle()}" />
+				<c:out value="${choosenNews.getTitle()}" />
 			</h1>
 
-			<img alt="image" src=<c:out value="${lastViewedNews.getImgLink()}"/>>
+			<img alt="image" src=<c:out value="${choosenNews.getImgLink()}"/>>
 
 			<h3>
-				<c:out value="${lastViewedNews.getFullText()}" />
+				<c:out value="${choosenNews.getFullText()}" />
 			</h3>
 
 		</div>

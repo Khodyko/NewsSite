@@ -25,8 +25,12 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
-	public void update(News news) {
-		// TODO Auto-generated method stub
+	public void update(News news) throws ServiceException {
+		try {
+			NEWS_DAO_IMPL.update(news);
+		} catch (DAOException e) {
+			throw new ServiceException(e.getMessage(), e);
+		}
 	}
 
 	@Override

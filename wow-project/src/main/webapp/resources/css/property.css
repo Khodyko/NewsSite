@@ -1,4 +1,14 @@
-
+textarea {
+	background-color: #534343;
+	border: none;
+	border-radius: 5px;
+	width: 200px;
+	height: 30px;
+	color: white;
+	padding-left: 15px;
+	font-family: Verdana;
+	padding: 10px;
+}
 
 body {
 	background-color: black
@@ -127,6 +137,8 @@ input {
 	color: white;
 	padding-left: 15px;
 }
+
+
 
 input[type=submit] {
 	border: none;

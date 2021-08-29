@@ -119,7 +119,7 @@
 					<div style="">
 						<div class="conteiner"><a href="Controller?commandToController=DELETE_NEWS&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
 								style="text-decoration: none;"left";">Delete news</a></div>
-						<div class="conteiner"><a href="#" style="text-decoration: none;"right";">Update news</a></div>
+						<div class="conteiner"><a href="Controller?commandToController=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}" style="text-decoration: none;"right";">Update news</a></div>
 					</div>
 					<hr align="center" size="1" color="white" />
 				</a>

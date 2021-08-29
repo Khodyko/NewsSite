@@ -7,8 +7,10 @@ import controllerCommandMethods.GoToConcreteNews;
 import controllerCommandMethods.GoToAddNewsPage;
 import controllerCommandMethods.GoToMainPage;
 import controllerCommandMethods.GoToRegistrationPage;
+import controllerCommandMethods.GoToUpdateNewsPage;
 import controllerCommandMethods.RegistrationNewUser;
 import controllerCommandMethods.UnknownCommand;
+import controllerCommandMethods.UpdateNews;
 import controllerCommandMethods.AddNews;
 import controllerCommandMethods.AuthorizationUser;
 import controllerCommandMethods.ChangeLocal;
@@ -28,6 +30,8 @@ public class CommandProvider {
 		commands.put(CommandName.CHANGE_LOCAL, new ChangeLocal());
 		commands.put(CommandName.GO_CONCRETE_NEWS, new GoToConcreteNews());
 		commands.put(CommandName.DELETE_NEWS, new DeleteNews());
+		commands.put(CommandName.UPDATE_NEWS_PAGE, new GoToUpdateNewsPage());
+		commands.put(CommandName.UPDATE_NEWS, new UpdateNews());
 		commands.put(CommandName.UNKNOWN_COMMAND, new UnknownCommand());
 			}
 

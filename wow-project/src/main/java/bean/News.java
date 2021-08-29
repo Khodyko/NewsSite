@@ -18,7 +18,11 @@ public class News implements Serializable{
 		this.title = title;
 		this.brief = brief;
 		this.fullText = fullText;
-		this.imgLink = imgLink;
+		if(imgLink==null || imgLink.equals("")) {
+			this.imgLink="resources/pictures/surpriseface.jpg";
+		}
+		else {
+		this.imgLink = imgLink;}
 	}
 	
 	public Integer getId() {
@@ -31,7 +35,11 @@ public class News implements Serializable{
 		this.title = title;
 		this.brief = brief;
 		this.fullText = fullText;
-		this.imgLink = imgLink;
+		if(imgLink==null || imgLink.equals("")) {
+			this.imgLink="resources/pictures/surpriseface.jpg";
+		}
+		else {
+		this.imgLink = imgLink;}
 	}
 
 	public void setId(Integer id) {

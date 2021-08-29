@@ -13,21 +13,23 @@ import service.NewsService;
 import service.ServiceException;
 import service.ServiceProvider;
 
-public class AddNews implements Command {
-	private static final ServiceProvider PROVIDER=ServiceProvider.getInstance();
+public class UpdateNews implements Command {
+	private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	private static final NewsService NEWS_SERVICE = PROVIDER.getNewService();
-	
-	
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession(false);
-		String lastCommandName="ADD_NEWS_PAGE";
+		HttpSession session = request.getSession(true);
+		String lastCommandName = "GO_TO_MAIN_PAGE";
 		String path;
 		String title=request.getParameter("title");
 		String fullText=request.getParameter("full_text");
 		String brief=request.getParameter("brief");
+		Integer id= Integer.parseInt(request.getParameter("choosenId"));
 		String imgLink=null;
-		News news=new News(title, fullText, brief, imgLink);
+		
+		News news=new News(id, title, fullText, brief, imgLink);
+		
 		String message="";
 		//		Part filePart = request.getPart("file");
 //		String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
@@ -64,19 +66,18 @@ public class AddNews implements Command {
 //		} //in running
 		try {
 			message= validateNews(news);
-			NEWS_SERVICE.create(news);
-			message="News succesfully added";
+			NEWS_SERVICE.update(news);
+			message="News succesfully updated";
 			request.setAttribute("message", message);
-			path="ADD_NEWS_PAGE&message=Registration complite, please log in";
+			path="GO_TO_MAIN_PAGE";
 			session.setAttribute("lastURL", lastCommandName ); //for redirect in localization
 			response.sendRedirect("Controller?commandToController="+path);
 		}
 		catch (ServiceException e) {
-			path="ADD_NEWS_PAGE&message="+message;
+			path="UPDATE_NEWS_PAGE&message="+message;
 			lastCommandName="REGISTRATION_PAGE";
 			session.setAttribute("lastURL", lastCommandName); //for redirect in localization
-			RequestDispatcher requestDispatcher=request.getRequestDispatcher(path);
-			requestDispatcher.forward(request, response);
+			response.sendRedirect("Controller?commandToController="+path);
 		}
 	}	
 	private String validateNews(News news) throws ServiceException{
@@ -101,5 +102,7 @@ public class AddNews implements Command {
 				news.setImgLink("resources/pictures/surpriseface.jpg");
 			}
 			return message;
+	
 	}
+
 }

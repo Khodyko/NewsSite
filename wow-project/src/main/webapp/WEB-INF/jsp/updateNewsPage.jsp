@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ page import="bean.News"%>
 <%@ page import="bean.User"%>
 <!DOCTYPE html>
 <html>
 <head>
 
 <meta charset="utf-8">
-<title>ADD NEWS PAGE</title>
+<title>UPDATE NEWS PAGE</title>
 <link rel="stylesheet" href="resources/css/property.css" type="text/css">
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />
@@ -70,24 +71,25 @@
 
 	</div>
 	<div class="registrationDiv" style="width: 400px; height:510px">
-		<h2 style="font-weight: 600;">Add New News</h2>
+		<h2 style="font-weight: 600;">Update New News</h2>
 		<form action="Controller" method="post" enctype="multipart/form-data">
-			<textarea name="title"  placeholder="title" style="size: 80px; width: 350px;" ></textarea>
+			<textarea name="title"  placeholder="title" style="size: 80px; width: 350px;" >${choosenNews.getTitle()}</textarea>
 			<br />
 			<br />
-			<textarea name="brief"  placeholder="brief" style="size: 80px; width: 350px; height:60px" ></textarea>
+			<textarea name="brief"  placeholder="brief" style="size: 80px; width: 350px; height:60px" >${choosenNews.getBrief()}</textarea>
 			<br />
 			<br />
-			<textarea name="full_text"  placeholder="full text" style="size: 80px; width: 350px; height:200px" ></textarea>
+			<textarea name="full_text"  placeholder="full text" style="size: 80px; width: 350px; height:200px" >${choosenNews.getFullText()}</textarea>
 			<br />
 			<br />
 			<!--<label style="color: white;"> 
 				Load Image <input type="file" name="file" style="visibility: hidden;" multiple accept="image/*" />
 			</label> 
 			-->
-			<input type="hidden" name="commandToController" value="ADD_NEWS" />
+			<input type="hidden" name="choosenId" value="${choosenNews.getId()}" />
+			<input type="hidden" name="commandToController" value="UPDATE_NEWS" />
 			
-			<button>Send</button>
+			<button>Update</button>
 		</form>
 	</div>
 

@@ -10,7 +10,7 @@
 <title>ADD NEWS PAGE</title>
 <link rel="stylesheet" href="resources/css/property.css" type="text/css">
 <fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="localization.local" var="loc" />
+<fmt:setBundle basename="resources.localization.local" var="loc" />
 
 
 <fmt:message bundle="${loc}" key="local.headline.button.name.register" var="register_button" />

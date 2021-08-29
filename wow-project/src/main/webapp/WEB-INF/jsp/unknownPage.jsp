@@ -9,7 +9,7 @@
 <title>Unknown Page</title>
 <link rel="stylesheet" href="resources/css/property.css" type="text/css">
 <fmt:setLocale value="${sessionScope.local}" />
-<fmt:setBundle basename="localization.local" var="loc" />
+<fmt:setBundle basename="resources.localization.local" var="loc" />
 <fmt:message bundle="${loc}" key="local.unknownpage.field.smthwrong" var="smth_wrong_title" />
 <fmt:message bundle="${loc}" key="local.unknownpage.button.tomainpage" var="to_main_page_btn" />
 <fmt:message bundle="${loc}" key="local.headline.button.name.register" var="register_button" />

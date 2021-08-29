@@ -3,7 +3,7 @@ package by.hodyko.www.dao.connectionpool;
 import java.util.ResourceBundle;
 
 public class DBNewsResourceManager {
-	private final static String DB = "by.hodyko.www.dao.connectionpool.db_news";
+	private final static String DB = "resources.properties.db_news";
 	private final static DBNewsResourceManager instance = new DBNewsResourceManager();
 	private ResourceBundle resourceBundle = ResourceBundle.getBundle(DB);
 

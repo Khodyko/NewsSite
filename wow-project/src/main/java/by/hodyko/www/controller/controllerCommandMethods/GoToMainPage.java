@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.hodyko.www.bean.News;
 import by.hodyko.www.controller.Command;
 import by.hodyko.www.service.NewsService;
@@ -20,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
 public class GoToMainPage implements Command {
 	private static final ServiceProvider PROVIDER = ServiceProvider.getInstance();
 	private static final NewsService NEWS_SERVICE = PROVIDER.getNewService();
-
+	private final static Logger logger=LogManager.getLogger();
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = "/WEB-INF/jsp/main.jsp";
@@ -30,7 +33,7 @@ public class GoToMainPage implements Command {
 		Integer pagesMaxNum=1;
 		
 		HttpSession session = request.getSession(true);
-		
+		logger.error("Log is work!!!!!!");
 
 		try {
 			pagesMaxNum = NEWS_SERVICE.getNewsMaxNumber();

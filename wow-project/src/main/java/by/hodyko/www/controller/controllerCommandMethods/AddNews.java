@@ -2,6 +2,10 @@ package by.hodyko.www.controller.controllerCommandMethods;
 
 import java.io.IOException;
 
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.hodyko.www.bean.News;
 import by.hodyko.www.controller.Command;
 import by.hodyko.www.service.NewsService;
@@ -16,6 +20,7 @@ import jakarta.servlet.http.HttpSession;
 public class AddNews implements Command {
 	private static final ServiceProvider PROVIDER=ServiceProvider.getInstance();
 	private static final NewsService NEWS_SERVICE = PROVIDER.getNewService();
+	
 	
 	
 	@Override
@@ -62,7 +67,9 @@ public class AddNews implements Command {
 //			response.sendRedirect(path);
 //			return;
 //		} //in running
+		
 		try {
+			
 			message= validateNews(news);
 			NEWS_SERVICE.create(news);
 			message="News succesfully added";
@@ -72,6 +79,7 @@ public class AddNews implements Command {
 			response.sendRedirect("Controller?commandToController="+path);
 		}
 		catch (ServiceException e) {
+			
 			path="ADD_NEWS_PAGE&message="+message;
 			lastCommandName="REGISTRATION_PAGE";
 			session.setAttribute("lastURL", lastCommandName); //for redirect in localization

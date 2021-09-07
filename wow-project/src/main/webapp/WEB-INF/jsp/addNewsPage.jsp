@@ -16,6 +16,12 @@
 <fmt:message bundle="${loc}" key="local.headline.button.name.register" var="register_button" />
 <fmt:message bundle="${loc}" key="local.headline.button.name.addnews" var="add_news_button" />
 <fmt:message bundle="${loc}" key="local.headline.button.name.login" var="login_button" />
+<fmt:message bundle="${loc}" key="local.add.news.h.header" var="addtable_head" />
+<fmt:message bundle="${loc}" key="local.add.news.textarea.title" var="news_title" />
+<fmt:message bundle="${loc}" key="local.add.news.textarea.brief" var="news_brief" />
+<fmt:message bundle="${loc}" key="local.add.news.textarea.fulltext" var="news_fulltext" />
+<fmt:message bundle="${loc}" key="local.add.news.button.send" var="news_send" />
+
 </head>
 <body>
 	<div class="headline">
@@ -28,11 +34,11 @@
 		<div class="conteiner">
 			<c:if test="${sessionScope.user != null}">
 				<%
-				String UserRole = (((User) request.getSession(false).getAttribute("user")).getRole()).toString();
-				request.setAttribute("UserRole", UserRole);
+				String userRole = (((User) request.getSession(false).getAttribute("user")).getRole()).toString();
+				request.setAttribute("userRole", userRole);
 				%>
 
-				<c:if test="${UserRole == 'ADMIN'}">
+				<c:if test="${userRole == 'ADMIN'}">
 					<form action="Controller" method="post">
 						<input type="hidden" name="commandToController" value="ADD_NEWS_PAGE" />
 						<button>${add_news_button}</button>
@@ -70,15 +76,15 @@
 
 	</div>
 	<div class="registrationDiv" style="width: 400px; height:510px">
-		<h2 style="font-weight: 600;">Add New News</h2>
+		<h2 style="font-weight: 600;">${addtable_head}</h2>
 		<form action="Controller" method="post" enctype="multipart/form-data">
-			<textarea name="title"  placeholder="title" style="size: 80px; width: 350px;" ></textarea>
+			<textarea name="title"  placeholder=${news_title} style="size: 80px; width: 350px;" ></textarea>
 			<br />
 			<br />
-			<textarea name="brief"  placeholder="brief" style="size: 80px; width: 350px; height:60px" ></textarea>
+			<textarea name="brief"  placeholder=${news_brief} style="size: 80px; width: 350px; height:60px" ></textarea>
 			<br />
 			<br />
-			<textarea name="full_text"  placeholder="full text" style="size: 80px; width: 350px; height:200px" ></textarea>
+			<textarea name="full_text"  placeholder=${news_fulltext} style="size: 80px; width: 350px; height:200px" ></textarea>
 			<br />
 			<br />
 			<!--<label style="color: white;"> 
@@ -87,7 +93,7 @@
 			-->
 			<input type="hidden" name="commandToController" value="ADD_NEWS" />
 			
-			<button>Send</button>
+			<button>${news_send}</button>
 		</form>
 	</div>
 

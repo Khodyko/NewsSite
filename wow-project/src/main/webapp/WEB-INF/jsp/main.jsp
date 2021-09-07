@@ -16,7 +16,7 @@
 <title>super</title>
 <style>
 .pagination {
-	border-top: 1px white solid;
+	
 	margin: 20px;
 	margin-left: 0px;
 	margin-right: 0px;
@@ -56,7 +56,8 @@
 <fmt:message bundle="${loc}" key="local.headline.button.name.register" var="register_button" />
 <fmt:message bundle="${loc}" key="local.headline.button.name.addnews" var="add_news_button" />
 <fmt:message bundle="${loc}" key="local.headline.button.name.login" var="login_button" />
-
+<fmt:message bundle="${loc}" key="local.main.link.delete" var="delete_link" />
+<fmt:message bundle="${loc}" key="local.main.link.update" var="update_link" />
 </head>
 
 <body>
@@ -117,12 +118,13 @@
 						<c:out value="${news.getBrief()}" />
 					</h4>
 					<div style="">
-						<div class="conteiner"><a href="Controller?commandToController=DELETE_NEWS&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
-								style="text-decoration: none;"left";">Delete news</a></div>
-						<div class="conteiner"><a href="Controller?commandToController=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}" style="text-decoration: none;"right";">Update news</a></div>
+						<div class="conteiner" style="float:left;"><a href="Controller?commandToController=DELETE_NEWS&choosenNewsId=${news.getId()}&currentPage=${currentPage}"
+								style="text-decoration: none;"left";">${delete_link}</a></div>
+						<div class="conteiner" style="float:right;"><a href="Controller?commandToController=UPDATE_NEWS_PAGE&choosenNewsId=${news.getId()}&currentPage=${currentPage}" style="text-decoration: none;"right";">${update_link}</a></div>
 					</div>
-					<hr align="center" size="1" color="white" />
 				</a>
+				<br>
+				<hr align="center" size="1" color="white"  />
 			</c:forEach></div>
 	</div>
 

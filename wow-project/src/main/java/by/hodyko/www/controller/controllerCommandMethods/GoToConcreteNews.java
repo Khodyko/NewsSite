@@ -1,7 +1,9 @@
 package by.hodyko.www.controller.controllerCommandMethods;
 
 import java.io.IOException;
-import java.util.List;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import by.hodyko.www.bean.News;
 import by.hodyko.www.controller.Command;
@@ -27,6 +29,7 @@ public class GoToConcreteNews implements Command {
 		Integer choosenNewsId = Integer.parseInt(request.getParameter("choosenNewsId"));
 		String lastCommandName = "GO_CONCRETE_NEWS&choosenNewsId=" + choosenNewsId;
 		News choosenNews = null;
+		Logger logger=LogManager.getLogger();
 
 		if (choosenNewsId == null || choosenNewsId < 1) {
 			path = "/WEB-INF/jsp/unknownPage.jsp";
@@ -41,6 +44,7 @@ public class GoToConcreteNews implements Command {
 
 		} catch (ServiceException e) {
 			path = "/WEB-INF/jsp/unknownPage.jsp";
+			logger.warn("lastcommand"+ lastCommandName+" "+e.getMessage());
 			lastCommandName = "UNKNOWN_COMMAND";
 			session.setAttribute("lastURL", lastCommandName); // for redirect in localization
 			response.sendRedirect("Controller?commandToController=" + lastCommandName);

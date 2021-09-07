@@ -3,6 +3,9 @@ package by.hodyko.www.controller.controllerCommandMethods;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.hodyko.www.bean.News;
 import by.hodyko.www.controller.Command;
 import by.hodyko.www.service.NewsService;
@@ -23,6 +26,8 @@ public class DeleteNews implements Command {
 		String lastCommandName = "GO_TO_MAIN_PAGE";
 		String path;
 		News newsDelete = null;
+		Logger logger=LogManager.getLogger();
+		
 		Integer choosenNewsId = Integer.parseInt(request.getParameter("choosenNewsId"));
 		Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		if (choosenNewsId == null || choosenNewsId < 1) {
@@ -39,8 +44,10 @@ public class DeleteNews implements Command {
 			session.setAttribute("lastURL", lastCommandName); // for redirect in localization
 			response.sendRedirect("Controller?commandToController=" + lastCommandName);
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			logger.warn("lastcommand "+ lastCommandName+" "+e.getMessage());
+			session.setAttribute("lastURL", lastCommandName); // for redirect in localization
+			response.sendRedirect("Controller?commandToController=" + lastCommandName);
 		}
 
 	}

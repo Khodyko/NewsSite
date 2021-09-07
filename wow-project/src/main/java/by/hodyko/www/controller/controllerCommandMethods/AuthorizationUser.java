@@ -2,6 +2,9 @@ package by.hodyko.www.controller.controllerCommandMethods;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.hodyko.www.bean.RegistrationInfo;
 import by.hodyko.www.bean.RoleEnum;
 import by.hodyko.www.bean.User;
@@ -26,8 +29,10 @@ public class AuthorizationUser implements Command {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		RoleEnum role = RoleEnum.STANDARD_USER;
+		Logger logger=LogManager.getLogger();
 
 		if (login == null || login.equals("") || password == null || password.equals("")) {
+			logger.warn("lastcommand "+ lastCommandName+" "+"some of fields of user-authorization-input are empty");
 			path = "AUTHORIZATION_PAGE&message=Some of fields are empty, please fill it";
 			request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 			response.sendRedirect("Controller?commandToController=" + path);
@@ -45,6 +50,7 @@ public class AuthorizationUser implements Command {
 
 		} catch (ServiceException e) {
 			exceptionMessage=e.getMessage();
+			logger.warn("command " +lastCommandName+e.getMessage());
 			path = "AUTHORIZATION_PAGE&message="+exceptionMessage;
 			request.getSession(true).setAttribute("lastURL", lastCommandName); // for redirect in localization
 			response.sendRedirect("Controller?commandToController=" + path);

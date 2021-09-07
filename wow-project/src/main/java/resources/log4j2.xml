@@ -3,12 +3,14 @@
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
 			<PatternLayout
-				pattern="%date{HH:mm:ss.SSS} % -5level [%thread] %class.%method():%line%n%msg%n%exception%n" />
+				pattern="%date{HH:mm:ss} %-5level [%thread] %class.%method():%line%n%msg%n%exception%n" />
 		</Console>
+		
 	</Appenders>
 	<Loggers>
-		<Root level="debug">
+		<Root level="trace">
 			<AppenderRef ref="Console" />
+			
 		</Root>
 	</Loggers>
 </Configuration>
